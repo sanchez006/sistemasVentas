@@ -1,0 +1,57 @@
+
+.cabezera{
+    padding-bottom: 60px;
+}
+
+/*Seccion etiqueta*/
+.etiquetas{
+    background-color: blueviolet;
+    padding: 20px;
+    border-radius:80px  20px ;
+
+   
+}
+
+.imputs{
+ border: 1px dashed blue;
+ height: 25px;
+}
+
+.tabla{
+    margin-top: 50px;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 300px;
+    border: 2px solid white;
+}
+
+.contenedor{
+    display: flex;
+    margin-top: 50px;
+    margin-left: 40px;
+}
+.izquierda{
+    flex: 1;
+
+  
+}
+.derecha{
+    flex: 2;
+    text-align: center;
+    
+}
+
+
+
+.regresar{
+    border-radius: 10px;
+    display: inline-block;
+    text-decoration: none;
+    padding: 25px;
+    margin-bottom: 15px;
+    height: 25px;
+    justify-content: space-around;
+    background-color: crimson;
+    font-weight: 700;
+    color: white;
+}
