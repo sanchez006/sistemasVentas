@@ -1,0 +1,9 @@
+
+.tabla{
+    width: 95%;
+    margin-top: 50px;
+    margin-left: 35px;
+    justify-content: space-between;
+    border: 2px  solid red;
+    padding-bottom: 300px;
+}

@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estiloClientes.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="estiloClientes.css" />
     <title>Document</title>
-</head>
-<body>
-    
-    <label for="nombre" class="etiquetas">Nombre</label>
-    <input type="text" id="nombre" class="imputs"/>
-    <label for="telefono" class="etiquetas">Teléfono</label>
-    <input type="text" id="telefono" class="imputs"/>
-    <label for="direccion" class="etiquetas">Direccion</label>
-    <input type="text" id="direccion" class="imputs" />
-    <label for="correo" class="etiquetas">Correo Electronico</label>
-    <input type="email" id="correo" class="imputs"> 
+  </head>
+  <body>
 
+    <table class="tabla" id="tablaClientes">   
+      <tr>
+        <th>NOMBRE</th>
+        <th>TELEFONO</th>
+        <th>DIRECCION</th>
+        <th>CORREO</th>
+      </tr>
+    </table>
+
+    <div>  
+        <input type="submit" value="GUARDAR">
+        <input type="submit" value="ACTULIZAR">
+        <input type="submit" value="ELIMINAR">
+        <input type="submit" value="NUEVO">
+    </div>
+
+    <div class="formulario">
+      <label for="nombre" class="etiquetas">Nombre</label>
+      <input type="text" id="nombre" class="imputs" />
+
+      <label for="telefono" class="etiquetas">Teléfono</label>
+      <input type="text" id="telefono" class="imputs" />
+
+      <label for="direccion" class="etiquetas">Direccion</label>
+      <input type="text" id="direccion" class="imputs" />
+
+      <label for="correo" class="etiquetas">Correo Electronico</label>
+      <input type="email" id="correo" class="imputs" />
+    </div>
 
     <footer>
-        <a href="../sistemaVentas.html" class="regresar">REGRESAR</a>
+      <a href="../sistemaVentas.html" class="regresar">REGRESAR</a>
     </footer>
-</body>
+  </body>
 </html>

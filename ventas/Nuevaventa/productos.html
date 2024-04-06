@@ -20,10 +20,10 @@
         <input type="number" id="precio" class="imputs"/>
         <label for="disponible" class="etiquetas">Cantidad Disponible</label>
         <input type="number" id="disponible" class="imputs" />
-        <input type="submit" value="elimiar" />
+        <input type="submit" value="elimiar" id="eliminar"/>
       </header>
     </div>
-    <table class="tabla">
+    <table class="tabla" id="tablaVenta">
       <tr>
         <th>CODIGO</th>
         <th>DESCRIPCION</th>
@@ -37,11 +37,11 @@
       <div  class="izquierda">
     <label for="dni" class="etiquetas">DNI</label>
     <input type="number" id="dni" class="imputs"/>
-    <label for="nombre" class="etiquetas">NOMBRE</label>
-    <input type="text" id="nombre" class="imputs" />
+    <label for="nombre" class="etiquetas" >NOMBRE</label> 
+    <input type="text" id="nombre" class="imputs" disabled/>
   </div>
     <div class="derecha">
-      <input type="submit" value="Generar Venta" >
+      <input type="submit" value="Generar Venta" id="generarVenta">
       <label for="total"class="etiquetas">Tolal</label>
       <label for="S" class="etiquetas">...</label>
     </div>

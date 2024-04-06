@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estiloProductos.css">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+
+
+    <div class="formulario">
+        <label for="nombre" class="etiquetas">Nombre</label>
+        <input type="text" id="nombre" class="imputs" />
+        <!--verificar si el id no afecta a los otros archivos por tener el mismo id-->
+  
+        <label for="descripcion" class="etiquetas">DESCRIPCION</label>
+        <input type="text" id="descripcion" class="imputs" />
+  
+        <label for="precio" class="etiquetas">PRECIO</label>
+        <input type="number" id="precio" class="imputs" />
+  
+        <label for="existencia" class="etiquetas">EXISTENCIAS</label>
+        <input type="number" id="existencia" class="imputs" />
+
+        <label for="proveedor" class="etiquetas">PROVEEDOR</label>
+        <input type="text" id="proveedor" class="imputs" /> <!--en el ejemplo en un sitema de seleccion en vez de text-->
+  
+      </div>
+
+      <table class="tabla" id="tablaProducto">   
+        <tr>
+          <th>NOMBRE</th>
+          <th>DESCRIPCION</th>
+          <th>PRECIO</th>
+          <th>EXISTENCIAS</th>
+          <th>PROVEEDOR</th>
+        </tr>
+      </table>
+
+      <div>  
+        <input type="submit" value="GUARDAR" id="guardar">
+        <input type="submit" value="ACTULIZAR" id="actualizar">
+        <input type="submit" value="ELIMINAR" id="elimiar">
+        <input type="submit" value="NUEVO" id="nuevo">
+        <input type="submit" value="PDF" id="pdf"> <!--DEBIAA DE SER EXCEL-->
+
+    </div>
+  
+      <footer> 
+        <a href="../sistemaVentas.html">REGRESAR</a>
+      </footer>
+</body>
+</html>

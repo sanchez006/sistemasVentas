@@ -1,7 +1,34 @@
 
 
 
+.tabla{
+    width: 95%;
+    margin-top: 50px;
+    margin-left: 35px;
+    justify-content: space-between;
+    border: 2px  solid red;
+    padding-bottom: 300px;
+}
 
+.formulario{
+    margin-top: 50px;
+    text-align: center;
+  
+}
+
+.etiquetas{
+    margin-left: 150px;
+    background-color: aqua;
+    padding: 10px;
+    font-weight: 900;
+    color: blueviolet;
+
+}
+
+.imputs{
+    border-color: springgreen;
+    height: 25px;
+}
 .regresar{
     border-radius: 10px;
     display: inline-block;
