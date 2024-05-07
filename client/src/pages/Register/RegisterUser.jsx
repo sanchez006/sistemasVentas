@@ -1,10 +1,10 @@
-import '../App.css'
+import '../../App.css'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
 // Initialization for ES Users
 import {Input, Ripple, initTWE,} from 'tw-elements';
-import {InputFloat, LabelFloat} from "../components/InputFloatLabel.jsx"
-import { ViewMode } from '../components/ViewMode.jsx'
+import {InputFloat, LabelFloat} from "../../components/InputFloatLabel.jsx"
+import { ViewMode } from '../../components/ViewMode.jsx'
 
 initTWE({ Input, Ripple });
 
