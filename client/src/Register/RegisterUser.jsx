@@ -46,6 +46,7 @@ export const RegisterUser = () => {
                         placeHolder={"Nombres"}
                         {...register('nombres')}
                       />
+                      {errors.nombres && <span className="text-red-500">Este campo es requerido</span>}
                       <LabelFloat text={"Nombres"}/>
                     </div>
                     <div className="relative">
@@ -56,10 +57,10 @@ export const RegisterUser = () => {
                         placeHolder={"Apellidos"}
                         {...register('apellidos')}
                       />
+                      {errors.apellidos && <span className="text-red-500">Este campo es requerido</span>}
                       <LabelFloat text={"Apellidos"}/>
                     </div>
                   </div>
-
                   <div className="relative">
                     <InputFloat
                       Type="text"
@@ -68,6 +69,7 @@ export const RegisterUser = () => {
                       placeHolder={"Dirección"}
                       {...register('direccion')}
                     />
+                    {errors.direccion && <span className="text-red-500">Este campo es requerido</span>}
                     <LabelFloat text={"Dirección"}/>
                   </div>
                   <div className="relative">
@@ -78,6 +80,7 @@ export const RegisterUser = () => {
                       placeHolder={"Teléfono"}
                       {...register('telefono')}
                     />
+                    {errors.telefono && <span className="text-red-500">Este campo es requerido</span>}
                     <LabelFloat text={"Teléfono"}/>
                   </div>
                   <div className="relative">
@@ -88,6 +91,7 @@ export const RegisterUser = () => {
                       placeHolder={"Correo Electrónico"}
                       {...register('correo_electronico')}
                     />
+                    {errors.correo_electronico && <span className="text-red-500">Este campo es requerido</span>}
                     <LabelFloat text={"Correo Electrónico"}/>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
@@ -99,6 +103,7 @@ export const RegisterUser = () => {
                         placeHolder={"Contraseña"}
                         {...register('contrasenia')}
                       />
+                      {errors.contrasenia && <span className="text-red-500">Este campo es requerido</span>}
                       <LabelFloat text={"Contraseña"}/>
                     </div>
                     <div className="relative">
@@ -108,6 +113,7 @@ export const RegisterUser = () => {
                         name="confirmar_contrasenia"
                         placeHolder={"Confirmar Contraseña"}
                       />
+                      {errors.confirmar_contrasenia && <span className="text-red-500">Este campo es requerido</span>}
                       <LabelFloat text={"Confirmar Contraseña"}/>
                     </div>
                   </div>
@@ -126,7 +132,7 @@ export const RegisterUser = () => {
                          className="w-full text-white bg-blue-600 hover:bg-blue-700 hover:cursor-pointer focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   />
                   <p className="text-center text-sm font-light text-gray-500 dark:text-gray-400">
-                    Tengo una cuenta, deseo <a href="#"
+                    Tengo una cuenta, deseo <a href="http://localhost:5173/"
                                                 className="font-medium text-primary-600 hover:underline dark:text-primary-500">Iniciar
                     Sesión</a>
                   </p>
