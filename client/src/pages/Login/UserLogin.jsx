@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { ViewMode } from '../../components/ViewMode.jsx'
 import { InputFloat, LabelFloat } from '../../components/InputFloatLabel.jsx'
+import { errorAlert } from '../../components/sweetAlert.js'
 
 export const UserLogin = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -11,8 +12,15 @@ export const UserLogin = () => {
     try {
       const response = await axios.post('http://localhost:3001/login', data)
       console.log('Respuesta del servidor: ', response.data)
+      errorAlert(
+        response.data.title,
+        response.data.message,
+        response.data.icon,
+        response.data.timer,
+      )
     } catch (error) {
       console.error('Error al iniciar sesión: ', error)
+      errorAlert('Error en el servidor', 'error', 2000)
     }
   }
 
