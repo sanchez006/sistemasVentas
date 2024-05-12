@@ -3,20 +3,62 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios';
 // Initialization for ES Users
 import {Input, Ripple, initTWE,} from 'tw-elements';
-import {InputFloat, LabelFloat} from "../../components/InputFloatLabel.jsx"
+import { LabelFloat } from "../../components/InputFloatLabel.jsx"
 import { ViewMode } from '../../components/ViewMode.jsx'
+import { errorAlert } from '../../components/sweetAlert.js'
 
 initTWE({ Input, Ripple });
 
 export const RegisterUser = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, handleSubmit, formState: { errors }, getValues } = useForm()
 
-  const addUser = async (data) => {
+  const addUser = async () => {
+    const formData = getValues();
+
+    //Verificar que coincidan las contraseñas
+    if (formData.contrasenia !== formData.confirmar_contrasenia) {
+      console.error("Las contraseñas no coinciden.");
+      errorAlert(
+        "Error",
+        "Las contraseñas no coinciden.",
+        "error",
+        2000,
+        false,
+        "OK"
+      );
+      console.log(formData.confirmar_contrasenia)
+      return;
+    }
+
+    //Verificar campos vacíos
+    if (Object.values(formData).some(value => !value)){
+      console.error("Uno o varios campos están vacíos.");
+      errorAlert(
+        "Error",
+        "Uno o varios campos están vacíos.",
+        "error",
+        2000,
+        false,
+        "OK"
+      );
+      return;
+    }
+
     try {
-      const response = await axios.post('http://localhost:3001/register', data)
+      const response = await axios.post('http://localhost:3001/register', formData);
       console.log('Respuesta del servidor: ', response.data)
+      errorAlert(
+        response.data.title,
+        response.data.message,
+        response.data.icon,
+        2000,
+        response.data.showCancelButton,
+        response.data.confirmButton,
+        response.data.cancelButton,
+      );
     } catch (error) {
       console.error('Error al enviar los datos al servidor: ', error)
+      console.log(getValues())
     }
   }
 
@@ -39,22 +81,24 @@ export const RegisterUser = () => {
                 <form onSubmit={handleSubmit(addUser)} className="space-y-4 md:space-y-6" action="#">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
                     <div className="relative">
-                      <InputFloat
-                        Type="text"
+                      <input
+                        className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder-tranparent"
+                        placeholder = "Nombres"
+                        type="text"
                         id="nombres"
                         name="nombres"
-                        placeHolder={"Nombres"}
                         {...register('nombres')}
                       />
                       {errors.nombres && <span className="text-red-500">Este campo es requerido</span>}
                       <LabelFloat text={"Nombres"}/>
                     </div>
                     <div className="relative">
-                      <InputFloat
-                        Type="text"
+                      <input
+                        className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder-tranparent"
+                        placeholder="apellidos"
+                        type="text"
                         id="apellidos"
                         name="apellidos"
-                        placeHolder={"Apellidos"}
                         {...register('apellidos')}
                       />
                       {errors.apellidos && <span className="text-red-500">Este campo es requerido</span>}
@@ -62,33 +106,36 @@ export const RegisterUser = () => {
                     </div>
                   </div>
                   <div className="relative">
-                    <InputFloat
-                      Type="text"
+                    <input
+                      className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder-tranparent"
+                      placeholder = "Dirección"
+                      type="text"
                       id="direccion"
                       name="direccion"
-                      placeHolder={"Dirección"}
                       {...register('direccion')}
                     />
                     {errors.direccion && <span className="text-red-500">Este campo es requerido</span>}
                     <LabelFloat text={"Dirección"}/>
                   </div>
                   <div className="relative">
-                    <InputFloat
-                      Type="number"
+                    <input
+                      className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder-tranparent"
+                      placeholder = "Teléfono"
+                      type="number"
                       id="telefono"
                       name="telefono"
-                      placeHolder={"Teléfono"}
                       {...register('telefono')}
                     />
                     {errors.telefono && <span className="text-red-500">Este campo es requerido</span>}
                     <LabelFloat text={"Teléfono"}/>
                   </div>
                   <div className="relative">
-                    <InputFloat
-                      Type="email"
+                    <input
+                      className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder-tranparent"
+                      placeholder="correo_electronico"
+                      type="email"
                       id="correo_electronico"
                       name="correo_electronico"
-                      placeHolder={"Correo Electrónico"}
                       {...register('correo_electronico')}
                     />
                     {errors.correo_electronico && <span className="text-red-500">Este campo es requerido</span>}
@@ -96,24 +143,26 @@ export const RegisterUser = () => {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
                     <div className="relative">
-                      <InputFloat
-                        type='password'
+                      <input
+                        className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder-tranparent"
+                        placeholder="contrasenia"
+                        type="password"
                         id="contrasenia"
                         name="contrasenia"
-                        placeHolder={"Contraseña"}
                         {...register('contrasenia')}
                       />
                       {errors.contrasenia && <span className="text-red-500">Este campo es requerido</span>}
                       <LabelFloat text={"Contraseña"}/>
                     </div>
                     <div className="relative">
-                      <InputFloat
-                        type='password'
+                      <input
+                        className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder-tranparent"
+                        placeholder="Confirmar Contraseña"
+                        type="password"
                         id="confirmar_contrasenia"
                         name="confirmar_contrasenia"
-                        placeHolder={"Confirmar Contraseña"}
+                        {...register('confirmar_contrasenia')}
                       />
-                      {errors.confirmar_contrasenia && <span className="text-red-500">Este campo es requerido</span>}
                       <LabelFloat text={"Confirmar Contraseña"}/>
                     </div>
                   </div>
@@ -128,9 +177,11 @@ export const RegisterUser = () => {
                     </div>
                   </div>
 
-                  <input type="submit" value="Registrarse"
+                  <input type="submit"
+                         value="Registrarse"
                          className="w-full text-white bg-blue-600 hover:bg-blue-700 hover:cursor-pointer focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   />
+
                   <p className="text-center text-sm font-light text-gray-500 dark:text-gray-400">
                     Tengo una cuenta, deseo <a href="http://localhost:5173/"
                                                 className="font-medium text-primary-600 hover:underline dark:text-primary-500">Iniciar
@@ -142,6 +193,5 @@ export const RegisterUser = () => {
           </div>
         </section>
       </>
-
   )
 }
