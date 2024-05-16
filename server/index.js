@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const db = require('./src/config/dbConfig');
 const loginRoute = require('./src/routes/loginRoute')
+const registerRoute = require('./src/routes/registerRoute')
 
 const app = express();
 const port = 3001;
@@ -24,6 +25,10 @@ db.connect((err) => {
 
 //USE THE QUERY login.js
 app.use(loginRoute);
+
+
+//USE THE QUERY register.js
+app.use(registerRoute);
 
 app.listen(port, () => {
   console.log(`El servidor está corriendo en el puerto: ${port}`);

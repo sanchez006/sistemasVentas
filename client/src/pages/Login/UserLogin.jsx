@@ -2,7 +2,7 @@ import '../../App.css'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { ViewMode } from '../../components/ViewMode.jsx'
-import { InputFloat, LabelFloat } from '../../components/InputFloatLabel.jsx'
+import { LabelFloat } from '../../components/InputFloatLabel.jsx'
 import { errorAlert } from '../../components/sweetAlert.js'
 
 export const UserLogin = () => {
@@ -16,7 +16,10 @@ export const UserLogin = () => {
         response.data.title,
         response.data.message,
         response.data.icon,
-        response.data.timer,
+        2000,
+        response.data.showCancelButton,
+        response.data.confirmButton,
+        response.data.cancelButton,
       )
     } catch (error) {
       console.error('Error al iniciar sesión: ', error)
@@ -41,22 +44,24 @@ export const UserLogin = () => {
               </h1>
               <form onSubmit={handleSubmit(login)} className="space-y-4 md:space-y-6" action="#">
                 <div className="relative">
-                  <InputFloat
+                  <input
                     type="email"
+                    className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-"
+                    placeholder="Correo electrónico"
                     id="correo_electronico"
                     name="correo_electronico"
-                    placeHolder={"Correo electrónico"}
                     {...register('correo_electronico')}
                   />
                   {errors.correo_electronico && <span className="text-red-500">Este campo es requerido</span>}
                   <LabelFloat text='Correo electrónico'/>
                 </div>
                 <div className="relative">
-                  <InputFloat
+                  <input
+                    className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-"
+                    placeholder="contrasenia"
                     type="password"
                     id="contrasenia"
                     name="contrasenia"
-                    placeHolder={"Contraseña"}
                     {...register('contrasenia')}
                   />
                   {errors.contrasenia && <span className="text-red-500">Este campo es requerido</span>}
