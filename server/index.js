@@ -26,6 +26,7 @@ db.connect((err) => {
 //USE THE QUERY login.js
 app.use(loginRoute);
 
+
 //USE THE QUERY register.js
 app.use(registerRoute);
 

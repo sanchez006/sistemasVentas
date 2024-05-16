@@ -9,6 +9,9 @@ function getRegisterUser(user) {
       return;
     }
 
+    //ELIMINAR EL CAMPO confirmar_contrasenia ANTES DE LA INSERCIÓN
+    const { confirmar_contrasenia, ...userData } = user;
+
     //VERIFICAR SI EL USUARIO SE ENCUENTRA REGISTRADO
     const checkEmail = 'SELECT COUNT(*) AS count FROM usuarios WHERE correo_electronico = ?';
 
@@ -24,7 +27,7 @@ function getRegisterUser(user) {
           //INSERTAR EN LA BASE DE DATOS
           const registerUser = 'INSERT INTO usuarios SET ?';
 
-          db.query(registerUser, user, (err, result) => {
+          db.query(registerUser, userData, (err, result) => {
             if (err) {
               console.error("Error al insertar en la tabla usuarios: ", err);
               reject(err);

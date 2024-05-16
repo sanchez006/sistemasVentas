@@ -7,10 +7,12 @@ function getLoginUser(user) {
     if (!correo_electronico || !contrasenia) {
       return resolve({
         title: "Error",
-        message: "¡Debe llenar todos los campos!",
+        message: "Uno o varios campos vacíos!",
         icon: "error",
         timer: 2000,
         success: false,
+        showCancelButton: false,
+        confirmButton: "Ok"
       });
     }
 
@@ -36,13 +38,28 @@ function getLoginUser(user) {
             }
             else {
               console.log("Transacción completada con éxito. ID insertado: " + result.insertId);
-              resolve({ message: "Usuario registrado", icon: "success", timer: 2000, success: true });
+              resolve({
+                title: "Bienvenido",
+                message: "Acceso exitoso",
+                icon: "success",
+                timer: 2000,
+                success: true,
+                showCancelButton: false,
+                confirmButton: "Ok"
+              });
             }
             console.log("Transacción completada con éxito. Datos obtenidos: " + result);
           })
         } else{
           console.log("No se encontró el usuario en la base de datos");
-          resolve({ message: "Usuario no encontrado", icon: "error", timer: 2000, success: false });
+          resolve({
+            message: "Usuario o contraseña incorrecta",
+            icon: "error",
+            timer: 2000,
+            success: false,
+            showCancelButton: false,
+            confirmButton: "Ok"
+          });
         }
       }
       console.log("Transacción completada con éxito. Datos obtenidos: " + result);

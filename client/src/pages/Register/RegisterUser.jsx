@@ -45,6 +45,7 @@ export const RegisterUser = () => {
     }
 
     try {
+      //Si el correo electrónico no existe, enviar la solicitud de registro
       const response = await axios.post('http://localhost:3001/register', formData);
       console.log('Respuesta del servidor: ', response.data)
       errorAlert(
