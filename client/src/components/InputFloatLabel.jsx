@@ -4,12 +4,13 @@ export const InputFloat = ({ placeHolder, type, id, name, register, children }) 
   return (
     <div className="relative">
       <input
-        className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder={placeHolder}
         type={type}
+        step={type === 'number' ? '0.01' : null}
         id={id}
         name={name}
-        {...register(name, { required: true })}
+        {...register(name, { required: true})}
       />
       {children}
     </div>
@@ -38,4 +39,5 @@ export const LabelFloat = ({ text }) => {
 
 LabelFloat.propTypes = {
   text: PropTypes.string.isRequired,
+  children: PropTypes.node
 }
