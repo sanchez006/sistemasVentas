@@ -18,8 +18,8 @@ export const ViewMode = () => {
   }, [temaOscuro]);
   return (
     <button
-      className={`m-4 float-end flex items-center px-4 py-2 rounded-lg focus:outline-none ${
-        temaOscuro ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'
+      className={`m-0 float-end flex items-center px-4 py-2 rounded-lg focus:outline-none ${
+        temaOscuro ? 'bg-gray-00 text-white' : 'bg-gray-000 text-gray-800'
       }`}
       onClick={alternarTema}
     >

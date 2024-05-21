@@ -8,7 +8,7 @@ import { errorAlert } from '../../components/sweetAlert.js'
 export const UserLogin = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  const login = async (data) => {
+  const onSubmit = async (data) => {
     try {
       const response = await axios.post('http://localhost:3001/login', data)
       console.log('Respuesta del servidor: ', response.data)
@@ -42,7 +42,7 @@ export const UserLogin = () => {
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Iniciar Sesión
               </h1>
-              <form onSubmit={handleSubmit(login)} className="space-y-4 md:space-y-6" action="#">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6" action="#">
                 <div className="relative">
                   <input
                     type="email"

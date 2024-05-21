@@ -1,13 +1,14 @@
 const express = require('express');
-const { getRegisterUser } = require('../controllers/register')
+const { getLoginUser } = require('../../controllers/login');
 
-const registerRoute = express();
 
-//USE THE QUERY register.js
-registerRoute.post('/register', async(req, res) => {
+const loginRoute = express();
+
+//USE THE QUERY login.js
+loginRoute.post('/login', async(req, res) => {
   try {
     const user = req.body;
-    const result = await getRegisterUser(user)
+    const result = await getLoginUser(user)
 
     res.status(200).send(result);
   }
@@ -18,4 +19,4 @@ registerRoute.post('/register', async(req, res) => {
   }
 });
 
-module.exports = registerRoute;
+module.exports = loginRoute;
