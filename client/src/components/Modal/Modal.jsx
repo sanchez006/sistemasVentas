@@ -1,12 +1,31 @@
-import PropTypes from 'prop-types'
-import { Button } from '../Button.jsx'
-import { InputFloat, LabelFloat } from '../InputFloatLabel.jsx'
-import { useForm } from 'react-hook-form'
-import axios from 'axios'
-import { errorAlert } from '../sweetAlert.js'
+import PropTypes from 'prop-types';
+import { Button } from '../Button.jsx';
+import { InputFloat, LabelFloat } from '../InputFloatLabel.jsx';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import { errorAlert } from '../sweetAlert.js';
+import { useEffect } from 'react';
 
 export const Modal = ({ isOpen, onClose }) => {
   const { register, handleSubmit, formState: { errors }, getValues, reset } = useForm();
+
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleEsc);
+    } else {
+      window.removeEventListener('keydown', handleEsc);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [isOpen, onClose]);
 
   const onSubmit = async () => {
     const formData = getValues();
@@ -71,40 +90,37 @@ export const Modal = ({ isOpen, onClose }) => {
                                 register={register}>
                       <LabelFloat text="Nombre" />
                     </InputFloat>
-                    {errors.nombre && <span className="text-red-500">Este campo es requerido</span>}
+                    {errors.nombre && <span className="text-red-500">{errors.nombre.message}</span>}
                   </div>
                   <div className="col-span-2 sm:col-span-1">
                     <InputFloat name="codigo"
                                 id="codigo"
                                 type="text"
                                 placeHolder="Código"
-                                register={register}
-                    >
+                                register={register}>
                       <LabelFloat text="Código"/>
                     </InputFloat>
-                    {errors.codigo && <span className="text-red-500">Este campo es requerido</span>}
+                    {errors.codigo && <span className="text-red-500">{errors.codigo.message}</span>}
                   </div>
                   <div className="col-span-2 sm:col-span-1">
-                    <InputFloat name="Precio"
+                    <InputFloat name="precio"
                                 id="precio"
                                 type="number"
                                 placeHolder="Precio"
-                                register={register}
-                    >
+                                register={register}>
                       <LabelFloat text="Precio"/>
                     </InputFloat>
-                    {errors.precio && <span className="text-red-500">Este campo es requerido</span>}
+                    {errors.precio && <span className="text-red-500">{errors.precio.message}</span>}
                   </div>
-
                   <div className="col-span-2">
-                    <InputFloat name={'Descripcion'}
-                                id={'descripcion'}
-                                type={'text'}
-                                placeHolder={'Descripción del producto'}
+                    <InputFloat name="descripcion"
+                                id="descripcion"
+                                type="text"
+                                placeHolder="Descripción del producto"
                                 register={register}>
                       <LabelFloat text="Descripción del producto"/>
                     </InputFloat>
-                    {errors.descripcion && <span className="text-red-500">Este campo es requerido</span>}
+                    {errors.descripcion && <span className="text-red-500">{errors.descripcion.message}</span>}
                   </div>
                 </div>
                 <button type="submit"
@@ -115,7 +131,7 @@ export const Modal = ({ isOpen, onClose }) => {
                           d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                           clipRule="evenodd"></path>
                   </svg>
-                  Agregar nuevo producto
+                  Agregar producto
                 </button>
               </form>
             </div>
@@ -123,10 +139,10 @@ export const Modal = ({ isOpen, onClose }) => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-}
+};
