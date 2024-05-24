@@ -1,11 +1,11 @@
-import '../../App.css'
+import '../App.css'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
 // Initialization for ES Users
 import {Input, Ripple, initTWE,} from 'tw-elements';
-import { LabelFloat } from "../../components/InputFloatLabel.jsx"
-import { ViewMode } from '../../components/ViewMode.jsx'
-import { errorAlert } from '../../components/sweetAlert.js'
+import { LabelFloat } from "../components/InputFloatLabel.jsx"
+import { ViewMode } from '../components/ViewMode.jsx'
+import { errorAlert } from '../components/sweetAlert.js'
 
 initTWE({ Input, Ripple });
 

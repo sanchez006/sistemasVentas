@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const InputFloat = ({ placeHolder, type, id, name, register, children }) => {
+export const InputFloat = ({ placeHolder, type, name, register, children }) => {
   return (
     <div className="relative">
       <input
@@ -8,8 +8,8 @@ export const InputFloat = ({ placeHolder, type, id, name, register, children }) 
         placeholder={placeHolder}
         type={type}
         step={type === 'number' ? '0.01' : null}
-        id={id}
         name={name}
+        id={name}
         {...register(name, { required: true})}
       />
       {children}
@@ -20,7 +20,6 @@ export const InputFloat = ({ placeHolder, type, id, name, register, children }) 
 InputFloat.propTypes = {
   placeHolder: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   register: PropTypes.func.isRequired,
   children: PropTypes.node

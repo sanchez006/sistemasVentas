@@ -1,7 +1,8 @@
 import {Routes, Route} from 'react-router-dom';
-import { UserLogin } from "../pages/Login/UserLogin.jsx";
-import {RegisterUser} from "../pages/Register/RegisterUser.jsx";
-import { Producto } from '../pages/Producto/Producto.jsx'
+import { UserLogin } from "../pages/UserLogin.jsx";
+import {RegisterUser} from "../pages/RegisterUser.jsx";
+import { Producto } from '../pages/Producto.jsx'
+import { Proveedores } from '../pages/Proveedores.jsx'
 
 export const ConfigRoutes = () => {
   return (
@@ -11,12 +12,24 @@ export const ConfigRoutes = () => {
             element={<UserLogin/>}
         />
         <Route
+            path="/productos"
+            element={<Producto/>}
+        />
+        <Route
+          path="/productos/registrarProductos"
+          element={<Producto/>}
+        />
+        <Route
             path="/register"
             element={<RegisterUser/>}
         />
         <Route
-            path="/productos"
-            element={<Producto/>}
+          path="/proveedores"
+          element={<Proveedores/>}
+        />
+        <Route
+          path="proveedores/registrarProveedor"
+          element={<Proveedores/>}
         />
       </Routes>
   )
