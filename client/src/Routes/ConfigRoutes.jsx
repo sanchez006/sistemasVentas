@@ -3,6 +3,7 @@ import { UserLogin } from "../pages/UserLogin.jsx";
 import {RegisterUser} from "../pages/RegisterUser.jsx";
 import { Producto } from '../pages/Producto.jsx'
 import { Proveedores } from '../pages/Proveedores.jsx'
+import { Clientes } from '../pages/Clientes.jsx'
 
 export const ConfigRoutes = () => {
   return (
@@ -30,6 +31,10 @@ export const ConfigRoutes = () => {
         <Route
           path="proveedores/registrarProveedor"
           element={<Proveedores/>}
+        />
+        <Route
+          path="clientes"
+          element={<Clientes/>}
         />
       </Routes>
   )
