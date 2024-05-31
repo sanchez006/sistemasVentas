@@ -1,57 +1,58 @@
-import { useState } from 'react'
-import { DropdownFilter } from './DropdownFilter.jsx';
-import { SearchInput } from '../SearchInput.jsx';
-import { Button } from '../Button.jsx';
-import { ProductsTable } from './ProductsTable.jsx';
+import { DropdownFilter } from '../Products/DropdownFilter.jsx'
+import { SearchInput } from '../SearchInput.jsx'
+import { Button } from '../Button.jsx'
 import { Modal } from '../Modal/Modal.jsx'
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ClientesTable } from './ClientesTable.jsx'
 
-export const ProductsMain = () => {
+
+export const ClientesMain = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleNewProduct = () => {
+  const handleNewProveedor = () => {
     // Abre el modal al hacer clic en "Nuevo Producto"
     setIsModalOpen(true);
-    navigate('/productos/registrarProductos');
+    navigate('/clientes/registrarCliente');
   };
 
   const handleCloseModal = () => {
     // Cierra el modal
     setIsModalOpen(false);
-    navigate('/productos');
+    navigate('/clientes');
   };
 
   const fields = [
     {
       name: 'nombre',
       type: 'text',
-      placeholder: 'Nombre',
-      label: 'Nombre',
+      placeholder: 'Nombre completo',
+      label: 'Nombre completo',
       required: true,
       fullWidth: true
     },
     {
-      name: 'codigo',
+      name: 'direccion',
       type: 'text',
-      placeholder: 'Código',
-      label: 'Código',
+      placeholder: 'Dirección',
+      label: 'Dirección',
       required: true,
-      fullWidth: false
+      fullWidth: true
     },
     {
-      name: 'precio',
-      type: 'number',
-      placeholder: 'Precio',
-      label: 'Precio',
+      name: 'telefono',
+      type: 'phone',
+      placeholder: 'Telefono',
+      label: 'No. Telefono',
       required: true,
-      fullWidth: false
+      fullWidth: true
     },
     {
-      name: 'descripcion',
-      type: 'text',
-      placeholder: 'Descripción',
-      label: 'Descripción',
+      name: 'correoElectronico',
+      type: 'email',
+      placeholder: 'Correo Electronico',
+      label: 'Correo Electronico',
       required: true,
       fullWidth: true
     }
@@ -69,23 +70,23 @@ export const ProductsMain = () => {
           <div className="flex gap-4">
             {/* BÚSQUEDA */}
             <SearchInput
-              label="Buscar Producto"
-              id="search"
+              label="Buscar Proveedor"
+              id="searchProveedor"
             />
             {/* FIN BÚSQUEDA */}
 
             {/* BOTÓN */}
             <Button
-              onClick={handleNewProduct}
+              onClick={handleNewProveedor}
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            > Nuevo Producto
+            > Nuevo Proveedor
             </Button>
             {/* FIN BOTÓN */}
           </div>
         </div>
         <div className="mb-4 sm:mb-0">
           {/* TABLA */}
-          <ProductsTable/>
+          <ClientesTable/>
           {/* FIN TABLA */}
         </div>
       </div>
@@ -95,13 +96,14 @@ export const ProductsMain = () => {
         <Modal isOpen={isModalOpen}
                onClose={handleCloseModal}
                fields={fields}
-               endpoint="http://localhost:3001/productos/registrarProductos"
-               labelTitle={"Nuevo Producto"}
-               labelBoton={"Agregar Producto"}
-        />
+               endpoint="http://localhost:3001/proveedores/registrarProveedor"
+               labelBoton={"Agregar Proveedor"}
+               labelTitle={"Nuevo Proveedor"}
+        >
+        </Modal>
       </div>
 
       {/* FIN MODAL */}
     </>
-  );
-};
+  )
+}

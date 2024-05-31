@@ -1,9 +1,9 @@
-import '../../App.css'
+import '../App.css'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
-import { ViewMode } from '../../components/ViewMode.jsx'
-import { LabelFloat } from '../../components/InputFloatLabel.jsx'
-import { errorAlert } from '../../components/sweetAlert.js'
+import { ViewMode } from '../components/ViewMode.jsx'
+import { LabelFloat } from '../components/InputFloatLabel.jsx'
+import { errorAlert } from '../components/sweetAlert.js'
 
 export const UserLogin = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()

@@ -6,6 +6,7 @@ const db = require('./src/config/dbConfig');
 const loginRoute = require('./src/routes/POST/loginRoute')
 const registerRoute = require('./src/routes/POST/registerRoute')
 const registerProductRoute = require('./src/routes/POST/registerProductRoute')
+const registerProveedorRoute = require('./src/routes/POST/registerProveedorRoute')
 
 const app = express();
 const port = 3001;
@@ -30,6 +31,9 @@ app.use(loginRoute);
 app.use(registerRoute);
 //USE THE QUERY registerProduct.js
 app.use(registerProductRoute);
+//USE THE QUERY registerProveedor.js
+app.use(registerProveedorRoute);
+
 
 app.listen(port, () => {
   console.log(`El servidor está corriendo en el puerto: ${port}`);
