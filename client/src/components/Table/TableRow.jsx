@@ -19,15 +19,8 @@ export const TableRow = ({ data, columns, isHeader = false, headerClassName = ''
 };
 
 TableRow.propTypes = {
-  data: PropTypes.object.isRequired,
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      field: PropTypes.string.isRequired,
-      header: PropTypes.string.isRequired,
-      className: PropTypes.string,
-      render: PropTypes.func,
-    })
-  ).isRequired,
+  data: PropTypes.object,
+  columns: PropTypes.array.isRequired,
   isHeader: PropTypes.bool,
   headerClassName: PropTypes.string,
 };

@@ -1,29 +1,23 @@
 import { Table } from '../Table/Table.jsx'
 
 const products = [
-  { id: 1, name: 'Apple MacBook Pro 17"', color: 'Silver', category: 'Laptop', price: '$2999', actions: ['View', 'Edit', 'Delete'] },
-  { id: 2, name: 'Microsoft Surface Pro', color: 'White', category: 'Laptop PC', price: '$1999', actions: ['View', 'Edit', 'Delete'] },
-  { id: 3, name: 'Magic Mouse 2', color: 'Black', category: 'Accessories', price: '$99', actions: ['View', 'Edit', 'Delete'] },
-  { id: 4, name: 'Apple Watch', color: 'Silver', category: 'Accessories', price: '$179', actions: ['View', 'Edit', 'Delete'] },
-  { id: 5, name: 'iPad', color: 'Gold', category: 'Tablet', price: '$699', actions: ['View', 'Edit', 'Delete'] },
-  { id: 6, name: 'Apple iMac 27"', color: 'Silver', category: 'PC Desktop', price: '$3999', actions: ['View', 'Edit', 'Delete'] },
+  { id: 1, name: 'Producto 1', price: 10 },
+  { id: 2, name: 'Producto 2', price: 20 },
+  { id: 3, name: 'Producto 3', price: 30 },
 ];
 
-const columns = {
-  id: '#',
-  name: 'Product name',
-  color: 'Color',
-  category: 'Category',
-  price: 'Price',
-  actions: 'Actions',
-};
+const columns = [
+  { header: 'ID', field: 'id' },
+  { header: 'Nombre', field: 'name' },
+  { header: 'Precio', field: 'price', render: (price) => `$${price}` }, // Ejemplo de función de renderizado personalizada
+];
 
 export const ProductsTable = () => {
 
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <Table columns={columns} products={products} />
+        <Table products={products} columns={columns} />
       </div>
     </>
 
