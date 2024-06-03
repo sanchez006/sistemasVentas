@@ -1,3 +1,4 @@
+//ProductsTable.jsx
 import { Table } from '../Table/Table.jsx'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
@@ -28,13 +29,12 @@ export const ProductsTable = () => {
     fetchProducts();
   }, []);
 
-  const handleEdit = async (id) => {
+  const handleEdit = async (id, updatedProduct) => {
     try {
-      const response = await axios.put(`http://localhost:3001/productos/editarProducto/${id}`, {
-        // Aquí puedes enviar los datos actualizados del producto
-      });
+      const response = await axios.put(`http://localhost:3001/productos/editarProducto/${id}`, updatedProduct);
       console.log('Producto actualizado:', response.data);
-      // Aquí puedes actualizar el estado de tu aplicación si es necesario
+      // Actualiza el estado local con los datos actualizados
+      setProducts(products.map(item => (item.id === id ? { ...item, ...updatedProduct } : item)));
     } catch (error) {
       console.error('Error al actualizar el producto:', error);
     }

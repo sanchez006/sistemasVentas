@@ -1,12 +1,24 @@
+//Modal.jsx
 import PropTypes from 'prop-types'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react'
 import { errorAlert } from '../sweetAlert.js';
 import { InputFloat, LabelFloat } from '../InputFloatLabel.jsx'
 
-export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitle }) => {
-  const { register, handleSubmit, formState: { errors }, getValues, reset } = useForm();
+export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitle, initialValues }) => {
+  const { register, handleSubmit, formState: { errors }, getValues, reset } = useForm(
+    { defaultValues: initialValues }
+  );
+  const {formValues, setFormValues} = useState(initialValues);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({
+     ...formValues,
+      [name]: value,
+    });
+  }
 
   useEffect(() => {
     const handleEsc = (event) => {
@@ -30,7 +42,7 @@ export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitl
     const formData = getValues();
 
     try {
-      const response = await axios.post(endpoint, formData);
+      const response = await axios.post(endpoint, formData, handleChange);
       console.log('Respuesta del servidor: ', response.data);
       errorAlert(
         response.data.title,
@@ -129,8 +141,10 @@ Modal.propTypes = {
       placeholder: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
       required: PropTypes.bool,
-      fullWidth: PropTypes.bool
+      fullWidth: PropTypes.bool,
+      defaultValue: PropTypes.string.isRequired,
     })
   ).isRequired,
   endpoint: PropTypes.string.isRequired,
+  initialValues: PropTypes.object.isRequired,
 };

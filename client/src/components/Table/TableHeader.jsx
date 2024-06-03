@@ -1,3 +1,4 @@
+//TableHeader.jsx
 import PropsTypes from 'prop-types'
 
 export const TableHeader = ({ columns }) => (

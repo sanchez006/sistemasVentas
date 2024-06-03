@@ -1,3 +1,4 @@
+//ConfigRoutes.jsx
 import {Routes, Route} from 'react-router-dom';
 import { UserLogin } from "../pages/UserLogin.jsx";
 import {RegisterUser} from "../pages/RegisterUser.jsx";

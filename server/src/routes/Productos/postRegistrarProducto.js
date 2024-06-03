@@ -1,10 +1,10 @@
 const express = require('express');
-const getRegisterProduct = require('../../controllers/Productos/registerProduct')
+const getRegisterProduct = require('../../controllers/Productos/registerProductController')
 
-const registerProductRoute = express();
+const postRegistrarProducto = express();
 
-//USE THE QUERY registerProduct.js
-registerProductRoute.post('/productos/registrarProductos', async(req, res) => {
+//USE THE QUERY registerProductController.js
+postRegistrarProducto.post('/productos/registrarProductos', async(req, res) => {
   try {
     const product = req.body;
     const result = await getRegisterProduct(product)
@@ -18,4 +18,4 @@ registerProductRoute.post('/productos/registrarProductos', async(req, res) => {
   }
 });
 
-module.exports = registerProductRoute;
+module.exports = postRegistrarProducto;
