@@ -1,121 +1,33 @@
 import { Table } from '../Table/Table.jsx'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 const columns = [
-  { header: 'ID', accessor: 'id' },
-  { header: 'Nombre del producto', accessor: 'productName' },
-  { header: 'Color', accessor: 'color' },
-  { header: 'Categoría', accessor: 'category' },
-  { header: 'Accesorios', accessor: 'accessories' },
-  { header: 'Disponible', accessor: 'available' },
-  { header: 'Precio', accessor: 'price' },
-  { header: 'Peso', accessor: 'weight' },
+  { header: 'No.', accessor: 'id' },
+  { header: 'Nombre del producto', accessor: 'nombre' },
+  { header: 'Código', accessor: 'codigo' },
+  { header: 'Precio', accessor: 'precio' },
+  { header: 'Descripción', accessor: 'descripcion' },
+  { header: 'Stock Actual', accessor: 'stockActual' },
 ];
 
-const data = [
-  {
-    id: 1,
-    productName: 'Apple MacBook Pro 17"',
-    color: 'Plata',
-    category: 'Portátil',
-    accessories: 'Sí',
-    available: 'Sí',
-    price: '$2999',
-    weight: '3.0 lb.',
-  },
-  {
-    id: 2,
-    productName: 'Microsoft Surface Pro',
-    color: 'Blanco',
-    category: 'PC Portátil',
-    accessories: 'No',
-    available: 'Sí',
-    price: '$1999',
-    weight: '1.0 lb.',
-  },
-  {
-    id: 3,
-    productName: 'Magic Mouse 2',
-    color: 'Negro',
-    category: 'Accesorios',
-    accessories: 'Sí',
-    available: 'No',
-    price: '$99',
-    weight: '0.2 lb.',
-  },
-  {
-    id: 4,
-    productName: 'Apple Watch',
-    color: 'Negro',
-    category: 'Relojes',
-    accessories: 'Sí',
-    available: 'No',
-    price: '$199',
-    weight: '0.12 lb.',
-  },
-  {
-    id: 5,
-    productName: 'Apple iMac',
-    color: 'Plata',
-    category: 'PC',
-    accessories: 'Sí',
-    available: 'Sí',
-    price: '$2999',
-    weight: '7.0 lb.',
-  },
-  {
-    id: 6,
-    productName: 'Apple AirPods',
-    color: 'Blanco',
-    category: 'Accesorios',
-    accessories: 'No',
-    available: 'Sí',
-    price: '$399',
-    weight: '38 g',
-  },
-  {
-    id: 7,
-    productName: 'iPad Pro',
-    color: 'Dorado',
-    category: 'Tableta',
-    accessories: 'No',
-    available: 'Sí',
-    price: '$699',
-    weight: '1.3 lb.',
-  },
-  {
-    id: 8,
-    productName: 'Magic Keyboard',
-    color: 'Negro',
-    category: 'Accesorios',
-    accessories: 'Sí',
-    available: 'Sí',
-    price: '$99',
-    weight: '453 g',
-  },
-  {
-    id: 9,
-    productName: 'Apple TV 4K',
-    color: 'Negro',
-    category: 'TV',
-    accessories: 'Sí',
-    available: 'No',
-    price: '$179',
-    weight: '1.78 lb.',
-  },
-  {
-    id: 10,
-    productName: 'AirTag',
-    color: 'Plata',
-    category: 'Accesorios',
-    accessories: 'Sí',
-    available: 'No',
-    price: '$29',
-    weight: '53 g',
-  },
-];
+
 
 export const ProductsTable = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/productos/listarProductos');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error al obtener los productos:', error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   const handleEdit = async (id) => {
     try {
       const response = await axios.put(`http://localhost:3001/productos/editarProducto/${id}`, {
@@ -141,7 +53,7 @@ export const ProductsTable = () => {
   return(
     <div>
       <Table columns={columns}
-             data={data}
+             data={products}
              onEdit={handleEdit}
              onDelete={handleDelete}/>
     </div>

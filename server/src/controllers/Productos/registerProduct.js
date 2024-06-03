@@ -1,4 +1,4 @@
-const db = require('../config/dbConfig');
+const db = require('../../config/dbConfig');
 
 function getRegisterProduct(product) {
   return new Promise((resolve, reject) => {

@@ -1,5 +1,5 @@
 const express = require('express');
-const getRegisterProduct = require('../../controllers/registerProduct')
+const getRegisterProduct = require('../../controllers/Productos/registerProduct')
 
 const registerProductRoute = express();
 

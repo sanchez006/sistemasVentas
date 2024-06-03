@@ -25,6 +25,10 @@ export const ConfigRoutes = () => {
         element={<Producto/>}
       />
       <Route
+        path="/productos/listarProductos"
+        element={<Producto/>}
+      />
+      <Route
         path="/productos/editarProducto"
         element={<Producto/>}
       />

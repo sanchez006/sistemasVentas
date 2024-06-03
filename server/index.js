@@ -7,6 +7,7 @@ const loginRoute = require('./src/routes/POST/loginRoute')
 const registerRoute = require('./src/routes/POST/registerRoute')
 const registerProductRoute = require('./src/routes/POST/registerProductRoute')
 const registerProveedorRoute = require('./src/routes/POST/registerProveedorRoute')
+const listarProductos = require('./src/routes/GET/listarProductos')
 
 const app = express();
 const port = 3001;
@@ -33,6 +34,8 @@ app.use(registerRoute);
 app.use(registerProductRoute);
 //USE THE QUERY registerProveedor.js
 app.use(registerProveedorRoute);
+//USE THE QUERY listarProductos.js
+app.use(listarProductos);
 
 
 app.listen(port, () => {
