@@ -42,11 +42,10 @@ export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitl
     const formData = getValues();
 
     try {
-      const response = await axios ({
-        method,
-        url: endpoint,
-        data: formData,
-      });
+      const response =  method === 'PUT'
+        ? await axios.put(endpoint, formData)
+        : await axios.post(endpoint, formData);
+
       console.log('Respuesta del servidor: ', response.data);
       errorAlert(
         response.data.title,

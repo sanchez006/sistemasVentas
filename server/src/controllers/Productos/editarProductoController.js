@@ -1,34 +1,37 @@
 //editarProductoController.js es el encargado de editar un producto en la base de datos
 const db = require('../../config/dbConfig')
 
-function editarProductoController (req, res) {
+function editarProductoController (editProducto, id) {
   return new Promise((resolve, reject) => {
-    const { id } = req.params;
-    const { nombre, codigo, precio, descripcion } = req.body;
 
     //VERIFICAR CAMPOS VACIOS
-    if (!nombre || !codigo || !precio || !descripcion) {
-      reject({message: 'Uno o varios campos vacíos'});
+    if (!editProducto || !id || Object.values(editProducto).some(value => !value)){
+      const error = new Error('Uno o varios campos están vacíos');
+      error.status = 400;
+      reject(error);
       return;
     }
 
-    //INSERTAR EN LA BASE DE DATOS
-    const query = `UPDATE productos SET nombre = ?, codigo = ?, precio = ?, descripcion = ? WHERE id = ?`;
-    const values = [nombre, codigo, precio, descripcion, id];
+    //ACTUALIZAR EN LA BASE DE DATOS
+    const query = `UPDATE productos SET ? WHERE id = ?`;
+    const values = [editProducto, id];
 
     db.query(query, values, (err, result) => {
       if (err) {
         console.error("Error al actualizar el producto: ", err);
         reject(err);
+        return;
       }
 
       if (result.affectedRows === 0) {
-        console.error('Producto no encontrado');
-        return res.status(404).json({message:'Producto no encontrado'});
+        const error = new Error('Producto no encontrado');
+        error.status = 404;
+        reject(error);
+        return;
       }
 
       console.log('Producto editado:', result);
-      res.status(200).json({
+      resolve({
         title: 'Éxito',
         message: 'Producto actualizado exitosamente',
         icon: 'success',
