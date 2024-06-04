@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 export const ProductsMain = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [refreshTable, setRefreshTable] = useState(false);
 
   const handleNewProduct = () => {
     // Abre el modal al hacer clic en "Nuevo Producto"
@@ -19,6 +20,7 @@ export const ProductsMain = () => {
   const handleCloseModal = () => {
     // Cierra el modal
     setIsModalOpen(false);
+    setRefreshTable(!refreshTable); //Cambiar el estado para actualizar la tabla
     navigate('/productos');
   };
 
@@ -85,7 +87,9 @@ export const ProductsMain = () => {
         </div>
         <div className="mb-4 sm:mb-0">
           {/* TABLA */}
-          <ProductsTable/>
+          <ProductsTable
+            key={refreshTable}
+          />
           {/* FIN TABLA */}
         </div>
       </div>
@@ -98,7 +102,9 @@ export const ProductsMain = () => {
                endpoint="http://localhost:3001/productos/registrarProductos"
                labelTitle={"Nuevo Producto"}
                labelBoton={"Agregar Producto"}
-               method={'POST'}/>
+               method={'POST'}
+               refreshTable={() => setRefreshTable(!refreshTable)}
+        />
       </div>
 
       {/* FIN MODAL */}

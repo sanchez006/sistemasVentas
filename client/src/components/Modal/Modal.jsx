@@ -6,11 +6,11 @@ import { useEffect, useState } from 'react'
 import { errorAlert } from '../sweetAlert.js';
 import { InputFloat, LabelFloat } from '../InputFloatLabel.jsx'
 
-export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitle, initialValues, method }) => {
+export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitle, initialValues, method, refreshTable }) => {
   const { register, handleSubmit, formState: { errors }, getValues, reset } = useForm(
     { defaultValues: initialValues }
   );
-  const {formValues, setFormValues} = useState(initialValues);
+  const [formValues, setFormValues] = useState(initialValues);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,21 +48,22 @@ export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitl
 
       console.log('Respuesta del servidor: ', response.data);
       errorAlert(
-        response.data.title,
-        response.data.message,
-        response.data.icon,
+        response.data.title || 'Éxito',
+        response.data.message || 'Solicitud realizada exitosamente',
+        response.data.icon || 'success',
         2000,
-        response.data.showCancelButton,
-        response.data.confirmButton,
-        response.data.cancelButton,
+        response.data.showCancelButton || false,
+        response.data.confirmButton || 'Aceptar',
+        response.data.cancelButton || ''
       );
       reset();
       onClose();
+      refreshTable();
     } catch (error) {
       console.error('Error al realizar la solicitud:', error);
       errorAlert(
         'Error',
-        'No se pudo realizar la solicitud.',
+        error.response ? error.response.data.message: 'No se pudo realizar la solicitud.',
         'error',
         2000,
         false,
@@ -155,4 +156,6 @@ Modal.propTypes = {
   endpoint: PropTypes.string.isRequired,
   initialValues: PropTypes.object,
   method: PropTypes.string.isRequired,
+  refreshTable: PropTypes.func.isRequired,
 };
+

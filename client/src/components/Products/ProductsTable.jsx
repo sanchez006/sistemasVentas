@@ -18,17 +18,18 @@ export const ProductsTable = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/productos/listarProductos');
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
+    }
+  }
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/productos/listarProductos');
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Error al obtener los productos:', error);
-      }
-    };
     fetchProducts();
-  }, []);
+  }
+  , []);
 
   const handleEditClick = (product) => {
     setSelectedProduct(product);
@@ -45,6 +46,12 @@ export const ProductsTable = () => {
     }
   };
 
+  const handleModalClose = () => {
+    setSelectedProduct(null);
+    setModalOpen(false);
+    fetchProducts();
+  }
+
   return(
     <div>
       <Table columns={columns}
@@ -56,7 +63,7 @@ export const ProductsTable = () => {
       {isModalOpen && selectedProduct && (
         <Modal
           isOpen={isModalOpen}
-          onClose={() => setModalOpen(false)}
+          onClose={handleModalClose}
           fields={[
             { name: 'nombre', type: 'text', placeholder: 'Nombre del producto', label: 'Nombre', fullWidth: true, defaultValue: selectedProduct ? selectedProduct.nombre : '', required: true },
             { name: 'codigo', type: 'text', placeholder: 'Código', label: 'Código', defaultValue: selectedProduct ? selectedProduct.codigo : '', required: true },
@@ -68,8 +75,9 @@ export const ProductsTable = () => {
           labelTitle={selectedProduct ? 'Editar Producto' : 'Crear Producto'}
           initialValues={selectedProduct || {}}
           method={selectedProduct ? 'PUT' : 'POST'}
+          refreshTable={fetchProducts}
         />
       )}
     </div>
   )
-};
+}
