@@ -1,7 +1,8 @@
+//putEditarProducto.js es el encargado de manejar la ruta para editar un producto en la base de datos
 const express = require('express')
 const editarProducto = require('../../controllers/Productos/editarProductoController')
 
-const putProducto = express();
+const putProducto = express.Router();
 
 //USE THE QUERY editarProductoController.js
 putProducto.put('/productos/editarProducto/:id', async(req, res) => {

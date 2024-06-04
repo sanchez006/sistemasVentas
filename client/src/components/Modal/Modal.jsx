@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { errorAlert } from '../sweetAlert.js';
 import { InputFloat, LabelFloat } from '../InputFloatLabel.jsx'
 
-export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitle, initialValues }) => {
+export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitle, initialValues, method }) => {
   const { register, handleSubmit, formState: { errors }, getValues, reset } = useForm(
     { defaultValues: initialValues }
   );
@@ -42,7 +42,11 @@ export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitl
     const formData = getValues();
 
     try {
-      const response = await axios.post(endpoint, formData, handleChange);
+      const response = await axios ({
+        method,
+        url: endpoint,
+        data: formData,
+      });
       console.log('Respuesta del servidor: ', response.data);
       errorAlert(
         response.data.title,
@@ -56,10 +60,10 @@ export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitl
       reset();
       onClose();
     } catch (error) {
-      console.error('Error al realizar el registro:', error);
+      console.error('Error al realizar la solicitud:', error);
       errorAlert(
         'Error',
-        'No se pudo realizar el registro.',
+        'No se pudo realizar la solicitud.',
         'error',
         2000,
         false,
@@ -102,6 +106,10 @@ export const Modal = ({ isOpen, onClose, fields, endpoint, labelBoton, labelTitl
                                     type={field.type}
                                     placeHolder={field.placeholder}
                                     register={register}
+                                    defaultValue={field.defaultValue}
+                                    required={field.required}
+                                    fullWidth={field.fullWidth}
+                                    onChange={handleChange}
                         >
                           <LabelFloat text={field.label} />
                         </InputFloat>
@@ -142,9 +150,10 @@ Modal.propTypes = {
       label: PropTypes.string.isRequired,
       required: PropTypes.bool,
       fullWidth: PropTypes.bool,
-      defaultValue: PropTypes.string.isRequired,
+      defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     })
   ).isRequired,
   endpoint: PropTypes.string.isRequired,
-  initialValues: PropTypes.object.isRequired,
+  initialValues: PropTypes.object,
+  method: PropTypes.string.isRequired,
 };

@@ -32,5 +32,4 @@ function getRegisterProduct(product) {
   })
 }
 
-
 module.exports = getRegisterProduct

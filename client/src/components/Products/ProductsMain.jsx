@@ -98,7 +98,7 @@ export const ProductsMain = () => {
                endpoint="http://localhost:3001/productos/registrarProductos"
                labelTitle={"Nuevo Producto"}
                labelBoton={"Agregar Producto"}
-        />
+               method={'POST'}/>
       </div>
 
       {/* FIN MODAL */}

@@ -2,6 +2,7 @@
 import { Table } from '../Table/Table.jsx'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { Modal } from '../Modal/Modal.jsx'
 
 const columns = [
   { header: 'No.', accessor: 'id' },
@@ -12,10 +13,10 @@ const columns = [
   { header: 'Stock Actual', accessor: 'stockActual' },
 ];
 
-
-
 export const ProductsTable = () => {
   const [products, setProducts] = useState([]);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -29,16 +30,10 @@ export const ProductsTable = () => {
     fetchProducts();
   }, []);
 
-  const handleEdit = async (id, updatedProduct) => {
-    try {
-      const response = await axios.put(`http://localhost:3001/productos/editarProducto/${id}`, updatedProduct);
-      console.log('Producto actualizado:', response.data);
-      // Actualiza el estado local con los datos actualizados
-      setProducts(products.map(item => (item.id === id ? { ...item, ...updatedProduct } : item)));
-    } catch (error) {
-      console.error('Error al actualizar el producto:', error);
-    }
-  };
+  const handleEditClick = (product) => {
+    setSelectedProduct(product);
+    setModalOpen(true); //Abrir el modal al hacer click en Editar
+  }
 
   const handleDelete = async (id) => {
     try {
@@ -54,8 +49,27 @@ export const ProductsTable = () => {
     <div>
       <Table columns={columns}
              data={products}
-             onEdit={handleEdit}
-             onDelete={handleDelete}/>
+             onEditClick={handleEditClick}
+             onDelete={handleDelete}
+      />
+
+      {isModalOpen && selectedProduct && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setModalOpen(false)}
+          fields={[
+            { name: 'nombre', type: 'text', placeholder: 'Nombre del producto', label: 'Nombre', fullWidth: true, defaultValue: selectedProduct ? selectedProduct.nombre : '', required: true },
+            { name: 'codigo', type: 'text', placeholder: 'Código', label: 'Código', defaultValue: selectedProduct ? selectedProduct.codigo : '', required: true },
+            { name: 'precio', type: 'number', placeholder: 'Precio', label: 'Precio', defaultValue: selectedProduct ? selectedProduct.precio : '', required: true },
+            { name: 'descripcion', type: 'text', placeholder: 'Descripción', label: 'Descripción', fullWidth: true, defaultValue: selectedProduct ? selectedProduct.descripcion : '', required: false },
+          ]}
+          endpoint={selectedProduct ? `http://localhost:3001/productos/editarProducto/${selectedProduct.id}` : 'http://localhost:3001/productos/crearProducto'}
+          labelBoton={selectedProduct ? 'Actualizar' : 'Crear'}
+          labelTitle={selectedProduct ? 'Editar Producto' : 'Crear Producto'}
+          initialValues={selectedProduct || {}}
+          method={selectedProduct ? 'PUT' : 'POST'}
+        />
+      )}
     </div>
   )
 };
