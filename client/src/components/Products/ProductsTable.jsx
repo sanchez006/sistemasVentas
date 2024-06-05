@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Modal } from '../Modal/Modal.jsx'
 import { useNavigate } from 'react-router-dom';
+import PropsTypes from 'prop-types'
 
 const columns = [
   { header: 'No.', accessor: 'correlativo' },
@@ -14,11 +15,21 @@ const columns = [
   { header: 'Stock Actual', accessor: 'stockActual' },
 ];
 
-export const ProductsTable = () => {
+export const ProductsTable = ({searchValue}) => {
   const [products, setProducts] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const navigate = useNavigate();
+
+  //Filtrar producto segun el valor de busqueda
+  const filteredProducts = products.filter(
+    product =>
+      product.nombre.toLowerCase().includes(searchValue.toLowerCase()) ||
+      product.codigo.toLowerCase().includes(searchValue.toLowerCase())
+  )
+
+  //Mostrar todos los productos si no hay termino de busqueda
+  const displayedProducts = searchValue ? filteredProducts : products;
 
   const fetchProducts = async () => {
     try {
@@ -69,7 +80,7 @@ export const ProductsTable = () => {
   return(
     <div>
       <Table columns={columns}
-             data={products}
+             data={displayedProducts}
              onEditClick={handleEditClick}
              onDelete={handleDelete}
       />
@@ -94,4 +105,8 @@ export const ProductsTable = () => {
       )}
     </div>
   )
+}
+
+ProductsTable.propTypes = {
+  searchValue: PropsTypes.string
 }

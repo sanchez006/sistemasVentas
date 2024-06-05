@@ -1,5 +1,6 @@
+//ProductMain.jsx
+
 import { useState } from 'react'
-import { DropdownFilter } from './DropdownFilter.jsx';
 import { SearchInput } from '../SearchInput.jsx';
 import { Button } from '../Button.jsx';
 import { ProductsTable } from './ProductsTable.jsx';
@@ -10,6 +11,11 @@ export const ProductsMain = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const [refreshTable, setRefreshTable] = useState(false);
+  const [searchValue, setSearchValue] = useState(''); //Valor del input de búsqueda
+
+  const handleSearch = (value) => {
+    setSearchValue(value);
+  };
 
   const handleNewProduct = () => {
     // Abre el modal al hacer clic en "Nuevo Producto"
@@ -62,17 +68,18 @@ export const ProductsMain = () => {
   return (
     <>
       <div className="relative p-5 overflow-x-auto shadow-md sm:rounded-lg">
-        <div className="flex flex-col sm:flex-row flex-wrap sm:space-x-4 items-center justify-between pb-4">
-          <div className="mb-4 sm:mb-0">
+        <div className=" flex-col sm:flex-row flex-wrap sm:space-x-4 items-center justify-between pb-4">
+          {/*<div className="mb-4 sm:mb-0">*/}
             {/* FILTRO */}
-            <DropdownFilter/>
+          {/*<DropdownFilter/>*/}
             {/* FIN FILTRO */}
-          </div>
+          {/*</div>*/}
           <div className="flex gap-4">
             {/* BÚSQUEDA */}
             <SearchInput
               label="Buscar Producto"
               id="search"
+              onSearch={handleSearch}
             />
             {/* FIN BÚSQUEDA */}
 
@@ -89,6 +96,7 @@ export const ProductsMain = () => {
           {/* TABLA */}
           <ProductsTable
             key={refreshTable}
+            searchValue={searchValue}
           />
           {/* FIN TABLA */}
         </div>
@@ -109,5 +117,5 @@ export const ProductsMain = () => {
 
       {/* FIN MODAL */}
     </>
-  );
-};
+  )
+}
