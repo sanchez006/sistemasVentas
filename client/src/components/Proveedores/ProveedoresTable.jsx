@@ -32,7 +32,7 @@ export const ProveedoresTable = ({searchValue}) => {
 
   const fetchProveedores = async () => {
     try {
-      const response = await axios.get('https://localhost:3001/proveedores/listarProveedores');
+      const response = await axios.get('http://localhost:3001/proveedores/listarProveedores');
       const proveedoresWithCorrelativo = response.data.map((proveedor, index) => ({
         ...proveedor,
           correlativo: index + 1
