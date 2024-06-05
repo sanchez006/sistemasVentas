@@ -78,7 +78,7 @@ export const ProductsMain = () => {
             {/* BÚSQUEDA */}
             <SearchInput
               label="Buscar Producto"
-              id="search"
+              id="searchProducto"
               onSearch={handleSearch}
             />
             {/* FIN BÚSQUEDA */}

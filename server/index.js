@@ -5,11 +5,11 @@ const cors = require('cors');
 const db = require('./src/config/dbConfig');
 const loginRoute = require('./src/routes/POST/loginRoute')
 const registerRoute = require('./src/routes/POST/registerRoute')
-const registerProductRoute = require('./src/routes/Productos/postRegistrarProducto')
-const registerProveedorRoute = require('./src/routes/POST/registerProveedorRoute')
 const listarProductos = require('./src/routes/Productos/getListarProductos')
 const putProducto = require('./src/routes/Productos/putEditarProducto')
 const deleteEliminarProducto = require('./src/routes/Productos/deleteEliminarProducto')
+const postRegistrarProveedor = require('./src/routes/Proveedores/postRegistrarProveedor')
+const postRegistrarProducto = require('./src/routes/Productos/postRegistrarProducto')
 
 const app = express();
 const port = 3001;
@@ -33,15 +33,17 @@ app.use(loginRoute);
 //USE THE QUERY register.js
 app.use(registerRoute);
 //USE THE QUERY registerProductController.js
-app.use(registerProductRoute);
-//USE THE QUERY registerProveedor.js
-app.use(registerProveedorRoute);
+app.use(postRegistrarProducto);
 //USE THE QUERY getListarProductos.js
 app.use(listarProductos);
 //USE THE QUERY editarProductoController.js
 app.use(putProducto);
 //USE THE QUERY eliminarProductoController.js
 app.use(deleteEliminarProducto);
+
+
+//USE THE QUERY registerProveedorController.js
+app.use(postRegistrarProveedor);
 
 
 app.listen(port, () => {

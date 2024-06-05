@@ -95,7 +95,7 @@ export const ProductsTable = ({searchValue}) => {
             { name: 'precio', type: 'number', placeholder: 'Precio', label: 'Precio', defaultValue: selectedProduct ? selectedProduct.precio : '', required: true },
             { name: 'descripcion', type: 'text', placeholder: 'Descripción', label: 'Descripción', fullWidth: true, defaultValue: selectedProduct ? selectedProduct.descripcion : '', required: false },
           ]}
-          endpoint={selectedProduct ? `http://localhost:3001/productos/editarProducto/${selectedProduct.id}` : 'http://localhost:3001/productos/crearProducto'}
+          endpoint={selectedProduct ? `http://localhost:3001/productos/editarProducto/${selectedProduct.id}` : 'http://localhost:3001/productos/registrarProductos'}
           labelBoton={selectedProduct ? 'Actualizar' : 'Crear'}
           labelTitle={selectedProduct ? 'Editar Producto' : 'Crear Producto'}
           initialValues={selectedProduct || {}}
