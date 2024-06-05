@@ -4,7 +4,7 @@ const editarProductoController = require('../../controllers/Productos/editarProd
 
 const putProducto = express.Router();
 
-//USE THE QUERY editarProductoController.js
+//USE THE QUERY editarProveedorController.js
 putProducto.put('/productos/editarProducto/:id', async(req, res) => {
   try {
     const {id} = req.params;

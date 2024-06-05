@@ -11,6 +11,7 @@ const deleteEliminarProducto = require('./src/routes/Productos/deleteEliminarPro
 const postRegistrarProveedor = require('./src/routes/Proveedores/postRegistrarProveedor')
 const postRegistrarProducto = require('./src/routes/Productos/postRegistrarProducto')
 const getListarProveedores = require('./src/routes/Proveedores/getListarProveedores')
+const putProveedor = require('./src/routes/Proveedores/putEditarProveedor')
 
 const app = express();
 const port = 3001;
@@ -37,7 +38,7 @@ app.use(registerRoute);
 app.use(postRegistrarProducto);
 //USE THE QUERY getListarProductos.js
 app.use(listarProductos);
-//USE THE QUERY editarProductoController.js
+//USE THE QUERY editarProveedorController.js
 app.use(putProducto);
 //USE THE QUERY eliminarProductoController.js
 app.use(deleteEliminarProducto);
@@ -47,6 +48,8 @@ app.use(deleteEliminarProducto);
 app.use(postRegistrarProveedor);
 //USE THE QUERY getListarProveedores.js
 app.use(getListarProveedores);
+//USE THE QUERY putProveedor.js
+app.use(putProveedor);
 
 
 app.listen(port, () => {

@@ -91,8 +91,8 @@ export const ProveedoresTable = ({searchValue}) => {
             fields={[
               { name: 'nombre', type: 'text', placeholder: 'Nombre del proveedor', label: 'Nombre', fullWidth: true, defaultValue: selectedProveedor? selectedProveedor.nombre : '', required: true },
               { name: 'direccion', type: 'text', placeholder: 'Dirección', label: 'Dirección', fullWidth: true, defaultValue: selectedProveedor? selectedProveedor.direccion : '', required: true },
-              { name: 'nit', type: 'text', placeholder: 'NIT', label: 'NIT', fullWidth: true, defaultValue: selectedProveedor? selectedProveedor.nit : '', required: true },
-              { name: 'telefono', type: 'text', placeholder: 'Teléfono', label: 'Teléfono', fullWidth: true, defaultValue: selectedProveedor? selectedProveedor.telefono : '', required: true },
+              { name: 'nit', type: 'text', placeholder: 'NIT', label: 'NIT', fullWidth: false, defaultValue: selectedProveedor? selectedProveedor.nit : '', required: true },
+              { name: 'telefono', type: 'text', placeholder: 'Teléfono', label: 'Teléfono', fullWidth: false, defaultValue: selectedProveedor? selectedProveedor.telefono : '', required: true },
               { name: 'correoElectronico', type: 'text', placeholder: 'Correo Electrónico', label: 'Correo Electrónico', fullWidth: true, defaultValue: selectedProveedor? selectedProveedor.correoElectronico : '', required: true },
             ]}
             endpoint={selectedProveedor ? `http://localhost:3001/proveedores/editarProveedor/${selectedProveedor}.id` : 'http://localhost:3001/proveedores/registrarProveedor'}

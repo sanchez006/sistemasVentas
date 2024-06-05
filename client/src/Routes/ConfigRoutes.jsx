@@ -45,6 +45,10 @@ export const ConfigRoutes = () => {
         path="proveedores/registrarProveedor"
         element={<Proveedores/>}
       />
+        <Route
+        path="proveedores/editarProveedor/:id"
+        element={<Proveedores/>}
+      />
       <Route
         path="clientes"
         element={<Clientes/>}
