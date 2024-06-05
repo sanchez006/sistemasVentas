@@ -3,6 +3,7 @@ import { Table } from '../Table/Table.jsx'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Modal } from '../Modal/Modal.jsx'
+import { useNavigate } from 'react-router-dom';
 
 const columns = [
   { header: 'No.', accessor: 'id' },
@@ -17,6 +18,7 @@ export const ProductsTable = () => {
   const [products, setProducts] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const navigate = useNavigate();
 
   const fetchProducts = async () => {
     try {
@@ -34,13 +36,14 @@ export const ProductsTable = () => {
   const handleEditClick = (product) => {
     setSelectedProduct(product);
     setModalOpen(true); //Abrir el modal al hacer click en Editar
+    navigate(`/productos/editarProducto/${product.id}`)
   }
 
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(`http://localhost:3001/productos/eliminarProducto/${id}`);
-      console.log('Producto eliminado:', response.data);
-      // Aquí puedes actualizar el estado de tu aplicación si es necesario
+      console.log(`Producto con ID ${id} eliminado`, response.data);
+      setProducts(products.filter(product => product.id !== id)); //Actualizar la tabla de
     } catch (error) {
       console.error('Error al eliminar el producto:', error);
     }
@@ -50,6 +53,7 @@ export const ProductsTable = () => {
     setSelectedProduct(null);
     setModalOpen(false);
     fetchProducts();
+    navigate('/productos');
   }
 
   return(

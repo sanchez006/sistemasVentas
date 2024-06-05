@@ -6,10 +6,6 @@ import { Producto } from '../pages/Producto.jsx'
 import { Proveedores } from '../pages/Proveedores.jsx'
 import { Clientes } from '../pages/Clientes.jsx'
 
-function ProductoTable () {
-    return null
-}
-
 export const ConfigRoutes = () => {
   return (
     <Routes>
@@ -34,8 +30,8 @@ export const ConfigRoutes = () => {
         element={<Producto/>}
       />
       <Route
-        path="/productos/editarProducto/{id}"
-        element={<ProductoTable/>}
+        path="/productos/editarProducto/:id"
+        element={<Producto/>}
       />
       <Route
         path="/productos/eliminarProducto"
