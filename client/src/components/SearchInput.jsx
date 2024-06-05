@@ -1,6 +1,6 @@
 import typesProps from 'prop-types'
 
-export const SearchInput = ({label, id}) => {
+export const SearchInput = ({label, id, onChange}) => {
   return (
     <>
       <div className="relative w-full sm:w-auto sm:ml-auto">
@@ -16,7 +16,9 @@ export const SearchInput = ({label, id}) => {
           </div>
           <input type="text" id={id}
                  className="block w-full sm:w-80 p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                 placeholder={label}/>
+                 placeholder={label}
+                  onChange={onChange}
+          />
         </div>
       </div>
     </>
@@ -25,5 +27,6 @@ export const SearchInput = ({label, id}) => {
 
 SearchInput.propTypes = {
   label: typesProps.string,
-  id: typesProps.string
+  id: typesProps.string,
+  onChange: typesProps.func,
 }

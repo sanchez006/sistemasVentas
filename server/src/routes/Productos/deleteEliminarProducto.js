@@ -7,7 +7,7 @@ const deleteEliminarProducto = express();
 //USE THE QUERY eliminarProductoController.js
 deleteEliminarProducto.delete('/productos/eliminarProducto/:id', async(req, res) => {
   try {
-    const {id} = req.params;
+    const id = req.params.id;
     const result = await eliminarProductoController(id)
 
     res.status(200).send(result);

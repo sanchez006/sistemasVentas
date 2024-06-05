@@ -6,7 +6,7 @@ import { Modal } from '../Modal/Modal.jsx'
 import { useNavigate } from 'react-router-dom';
 
 const columns = [
-  { header: 'No.', accessor: 'id' },
+  { header: 'No.', accessor: 'correlativo' },
   { header: 'Nombre del producto', accessor: 'nombre' },
   { header: 'Código', accessor: 'codigo' },
   { header: 'Precio', accessor: 'precio' },
@@ -23,7 +23,12 @@ export const ProductsTable = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get('http://localhost:3001/productos/listarProductos');
-      setProducts(response.data);
+      //Añadir un correlativo a cada producto basado en su posiión en el array
+      const productsWithCorrelativo = response.data.map((product, index) => ({
+        ...product,
+        correlativo: index + 1
+      }));
+      setProducts(productsWithCorrelativo);
     } catch (error) {
       console.error('Error al obtener los productos:', error);
     }
@@ -43,7 +48,12 @@ export const ProductsTable = () => {
     try {
       const response = await axios.delete(`http://localhost:3001/productos/eliminarProducto/${id}`);
       console.log(`Producto con ID ${id} eliminado`, response.data);
-      setProducts(products.filter(product => product.id !== id)); //Actualizar la tabla de
+      setProducts(prevProducts =>{
+        return prevProducts.filter(product => product.id !== id).map((product, index) => ({
+          ...product,
+          correlativo: index + 1
+        }));
+        }) //Actualizar la tabla de
     } catch (error) {
       console.error('Error al eliminar el producto:', error);
     }
