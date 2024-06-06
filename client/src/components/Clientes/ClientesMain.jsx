@@ -1,4 +1,4 @@
-import { DropdownFilter } from '../Products/DropdownFilter.jsx'
+
 import { SearchInput } from '../SearchInput.jsx'
 import { Button } from '../Button.jsx'
 import { Modal } from '../Modal/Modal.jsx'
@@ -10,6 +10,12 @@ import { ClientesTable } from './ClientesTable.jsx'
 export const ClientesMain = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [refreshTable, setRefreshTable] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearch = (value) => {
+    setSearchValue(value);
+  }
 
   const handleNewProveedor = () => {
     // Abre el modal al hacer clic en "Nuevo Producto"
@@ -20,6 +26,7 @@ export const ClientesMain = () => {
   const handleCloseModal = () => {
     // Cierra el modal
     setIsModalOpen(false);
+    setRefreshTable(!refreshTable);
     navigate('/clientes');
   };
 
@@ -61,17 +68,18 @@ export const ClientesMain = () => {
   return (
     <>
       <div className="relative p-5 overflow-x-auto shadow-md sm:rounded-lg">
-        <div className="flex flex-col sm:flex-row flex-wrap sm:space-x-4 items-center justify-between pb-4">
-          <div className="mb-4 sm:mb-0">
-            {/* FILTRO */}
-            <DropdownFilter/>
-            {/* FIN FILTRO */}
-          </div>
+        <div className="flex-col sm:flex-row flex-wrap sm:space-x-4 items-center justify-between pb-4">
+          {/*<div className="mb-4 sm:mb-0">*/}
+          {/* FILTRO */}
+          {/*<DropdownFilter/>*/}
+          {/* FIN FILTRO */}
+          {/*</div>*/}
           <div className="flex gap-4">
             {/* BÚSQUEDA */}
             <SearchInput
               label="Buscar Proveedor"
               id="searchProveedor"
+              onSearch={handleSearch}
             />
             {/* FIN BÚSQUEDA */}
 
@@ -86,7 +94,10 @@ export const ClientesMain = () => {
         </div>
         <div className="mb-4 sm:mb-0">
           {/* TABLA */}
-          <ClientesTable/>
+          <ClientesTable
+            key = {refreshTable}
+            searchValue = {searchValue}
+          />
           {/* FIN TABLA */}
         </div>
       </div>
@@ -99,8 +110,9 @@ export const ClientesMain = () => {
                endpoint="http://localhost:3001/proveedores/registrarProveedor"
                labelBoton={"Agregar Proveedor"}
                labelTitle={"Nuevo Proveedor"}
-        >
-        </Modal>
+               method={'POST'}
+               refreshTable={() => setRefreshTable(!refreshTable)}
+        />
       </div>
 
       {/* FIN MODAL */}
