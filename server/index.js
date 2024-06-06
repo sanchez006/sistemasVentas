@@ -13,6 +13,8 @@ const postRegistrarProducto = require('./src/routes/Productos/postRegistrarProdu
 const getListarProveedores = require('./src/routes/Proveedores/getListarProveedores')
 const putProveedor = require('./src/routes/Proveedores/putEditarProveedor')
 const getListarClientes = require('./src/routes/Clientes/getListarClientes')
+const postRegistrarCliente = require('./src/routes/Clientes/postRegistrarCliente')
+const putCliente = require('./src/routes/Clientes/putEditarCliente')
 
 const app = express();
 const port = 3001;
@@ -55,7 +57,10 @@ app.use(putProveedor);
 
 //USE THE QUERY getListarClientes.js
 app.use(getListarClientes);
-
+//USE THE QUERY postRegistrarCliente.js
+app.use(postRegistrarCliente);
+//USE THE QUERY putEditarCliente.js
+app.use(putCliente);
 
 app.listen(port, () => {
   console.log(`El servidor está corriendo en el puerto: ${port}`);

@@ -17,7 +17,7 @@ export const ClientesMain = () => {
     setSearchValue(value);
   }
 
-  const handleNewProveedor = () => {
+  const handleNewCliente = () => {
     // Abre el modal al hacer clic en "Nuevo Producto"
     setIsModalOpen(true);
     navigate('/clientes/registrarCliente');
@@ -34,8 +34,24 @@ export const ClientesMain = () => {
     {
       name: 'nombre',
       type: 'text',
-      placeholder: 'Nombre completo',
-      label: 'Nombre completo',
+      placeholder: 'Nombres',
+      label: 'Nombres',
+      required: true,
+      fullWidth: false
+    },
+    {
+      name: 'apellido',
+      type: 'text',
+      placeholder: 'Apellidos',
+      label: 'Apellidos',
+      required: true,
+      fullWidth: false
+    },
+    {
+      name: 'nit',
+      type: 'text',
+      placeholder: 'NIT',
+      label: 'NIT',
       required: true,
       fullWidth: true
     },
@@ -44,22 +60,6 @@ export const ClientesMain = () => {
       type: 'text',
       placeholder: 'Dirección',
       label: 'Dirección',
-      required: true,
-      fullWidth: true
-    },
-    {
-      name: 'telefono',
-      type: 'phone',
-      placeholder: 'Telefono',
-      label: 'No. Telefono',
-      required: true,
-      fullWidth: true
-    },
-    {
-      name: 'correoElectronico',
-      type: 'email',
-      placeholder: 'Correo Electronico',
-      label: 'Correo Electronico',
       required: true,
       fullWidth: true
     }
@@ -77,17 +77,17 @@ export const ClientesMain = () => {
           <div className="flex gap-4">
             {/* BÚSQUEDA */}
             <SearchInput
-              label="Buscar Proveedor"
-              id="searchProveedor"
+              label="Buscar Cliente"
+              id="searchCliente"
               onSearch={handleSearch}
             />
             {/* FIN BÚSQUEDA */}
 
             {/* BOTÓN */}
             <Button
-              onClick={handleNewProveedor}
+              onClick={handleNewCliente}
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            > Nuevo Proveedor
+            > Nuevo Cliente
             </Button>
             {/* FIN BOTÓN */}
           </div>
@@ -107,9 +107,9 @@ export const ClientesMain = () => {
         <Modal isOpen={isModalOpen}
                onClose={handleCloseModal}
                fields={fields}
-               endpoint="http://localhost:3001/proveedores/registrarProveedor"
-               labelBoton={"Agregar Proveedor"}
-               labelTitle={"Nuevo Proveedor"}
+               endpoint="http://localhost:3001/clientes/registrarCliente"
+               labelBoton={"Agregar Cliente"}
+               labelTitle={"Nuevo Cliente"}
                method={'POST'}
                refreshTable={() => setRefreshTable(!refreshTable)}
         />

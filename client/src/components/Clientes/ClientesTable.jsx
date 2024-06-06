@@ -16,7 +16,7 @@ const columns = [
 export const ClientesTable = ({searchValue}) => {
   const [clientes, setClientes] = useState([])
   const [isModalOpen, setModalOpen] = useState(false)
-  const [selectedCliente, setSelectedCliente] = useState(null)
+  const [selectedCliente, setSelectedCliente] = useState(null);
   const navigate = useNavigate()
 
   //Filtrar cliente segùn el valor de busqueda
@@ -88,10 +88,10 @@ export const ClientesTable = ({searchValue}) => {
                fields={[
                  {name: 'nombre', type: 'text', placeholder: 'Nombres', label: 'Nombres', fullWidth: false, defaultValue: selectedCliente ? selectedCliente.nombre : '', required: true},
                  {name: 'apellido', type: 'text', placeholder: 'Apellidos', label: 'Apellidos', fullWidth: false, defaultValue: selectedCliente ? selectedCliente.apellido : '', required: true},
-                 {name: 'nit', type: 'text', placeholder: 'NIT', label: 'NIT', fullWidth: false, defaultValue: selectedCliente ? selectedCliente.nit : '', required: true},
-                 {name: 'direccion', type: 'text', placeholder: 'Direccion', label: 'Direccion', fullWidth: false, defaultValue: selectedCliente ? selectedCliente.direccion : '', required: true}
+                 {name: 'nit', type: 'text', placeholder: 'NIT', label: 'NIT', fullWidth: true, defaultValue: selectedCliente ? selectedCliente.nit : '', required: true},
+                 {name: 'direccion', type: 'text', placeholder: 'Direccion', label: 'Direccion', fullWidth: true, defaultValue: selectedCliente ? selectedCliente.direccion : '', required: true}
                ]}
-               endpoint={selectedCliente ? `http//localhost:3001/clientes/editarCliente/${selectedCliente.id}` : 'http://localhost:3001/clientes/registrarCliente'}
+               endpoint={selectedCliente ? `http://localhost:3001/clientes/editarCliente/${selectedCliente.id}` : 'http://localhost:3001/clientes/registrarCliente'}
                labelBoton = {selectedCliente ? 'Actualizar' : 'Crear'}
                labelTitle = {selectedCliente ? 'Editar Cliente' : 'Crear Cliente'}
                initialValues={selectedCliente || {}}
