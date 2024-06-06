@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 export const DropdownUser = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [userData, setUserData] = useState(null);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -21,6 +22,8 @@ export const DropdownUser = () => {
     };
   }, []);
 
+
+
   return (
     <div className="relative flex items-center">
       <button onClick={toggleDropdown}
@@ -37,34 +40,16 @@ export const DropdownUser = () => {
       </button>
       {isOpen && (
         <div ref={dropdownRef}
-             className="absolute right-0 mt-[17rem] w-48 bg-white divide-y divide-gray-100 rounded-md shadow-lg dark:bg-gray-700 dark:divide-gray-600"
+             className="absolute right-0 mt-[10rem] w-48 bg-white divide-y divide-gray-100 rounded-md shadow-lg dark:bg-gray-700 dark:divide-gray-600"
              id="dropdown-user"
         >
           <div className="px-4 py-3">
-            <p className="text-sm text-gray-900 dark:text-white">Neil Sims</p>
+            <p className="text-sm text-gray-900 dark:text-white">userData.nombres</p>
             <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300">
-              neil.sims@flowbite.com
+              userData.correo_electronico
             </p>
           </div>
           <ul className="py-1">
-            <li>
-              <a href="#"
-                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-              > Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="#"
-                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-              > Settings
-              </a>
-            </li>
-            <li>
-              <a href="#"
-                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-              > Earnings
-              </a>
-            </li>
             <li>
               <a href="#"
                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"

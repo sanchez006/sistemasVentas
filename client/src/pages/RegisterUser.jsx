@@ -1,13 +1,11 @@
+//RegisterUser.jsx
 import '../App.css'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
 // Initialization for ES Users
-import {Input, Ripple, initTWE,} from 'tw-elements';
 import { LabelFloat } from "../components/InputFloatLabel.jsx"
 import { ViewMode } from '../components/ViewMode.jsx'
 import { errorAlert } from '../components/sweetAlert.js'
-
-initTWE({ Input, Ripple });
 
 export const RegisterUser = () => {
   const { register, handleSubmit, formState: { errors }, getValues } = useForm()
@@ -122,7 +120,7 @@ export const RegisterUser = () => {
                     <input
                       className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder-tranparent"
                       placeholder = "Teléfono"
-                      type="number"
+                      type="text"
                       id="telefono"
                       name="telefono"
                       {...register('telefono')}

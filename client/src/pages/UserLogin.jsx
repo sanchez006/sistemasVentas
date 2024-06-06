@@ -4,23 +4,29 @@ import axios from 'axios'
 import { ViewMode } from '../components/ViewMode.jsx'
 import { LabelFloat } from '../components/InputFloatLabel.jsx'
 import { errorAlert } from '../components/sweetAlert.js'
+import { useNavigate } from 'react-router-dom'
 
 export const UserLogin = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
+  const navigate = useNavigate()
 
   const onSubmit = async (data) => {
     try {
       const response = await axios.post('http://localhost:3001/login', data)
       console.log('Respuesta del servidor: ', response.data)
-      errorAlert(
-        response.data.title,
-        response.data.message,
-        response.data.icon,
-        2000,
-        response.data.showCancelButton,
-        response.data.confirmButton,
-        response.data.cancelButton,
-      )
+      if (response.data.success){
+        navigate('/productos');
+      } else {
+        errorAlert(
+          response.data.title,
+          response.data.message,
+          response.data.icon,
+          2000,
+          response.data.showCancelButton,
+          response.data.confirmButton,
+          response.data.cancelButton,
+        )
+      }
     } catch (error) {
       console.error('Error al iniciar sesión: ', error)
       errorAlert('Error en el servidor', 'error', 2000)
