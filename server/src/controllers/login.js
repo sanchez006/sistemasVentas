@@ -17,53 +17,74 @@ function getLoginUser(user) {
     }
 
     //Verificar si el usuario existe en la base de datos
-    const loginUser = 'SELECT id FROM usuarios WHERE correo_electronico = ? AND contrasenia = ?';
+    const checkEmail = 'SELECT id FROM usuarios WHERE correo_electronico = ?';
 
-    db.query(loginUser, [correo_electronico, contrasenia], (err, result) => {
+    db.query(checkEmail, correo_electronico, (err, result) => {
       if (err) {
         console.error("Error al consultar en la tabla usuarios: ", err);
         return reject("Error al consultar en la tabla usuarios");
-      }
-      else {
-        if (result.length > 0) {
-          const usuario_id = result[0].id;
-
-          //REGISTRO DE ACCESO EN LA TABLA 'accesousuarios'
-          const acceso = { usuario_id };
-          const registrarAcceso = 'INSERT INTO accesousuarios SET ?';
-          db.query(registrarAcceso, acceso, (err, result) => {
-            if (err) {
-              console.error("Error al insertar en la tabla accesousuarios: ", err);
-              return reject("Error al insertar en la tabla accesousuarios");
-            }
-            else {
-              console.log("Transacción completada con éxito. ID insertado: " + result.insertId);
-              resolve({
-                title: "Bienvenido",
-                message: "Acceso exitoso",
-                icon: "success",
-                timer: 2000,
-                success: true,
-                showCancelButton: false,
-                confirmButton: "Ok"
-              });
-            }
-            console.log("Transacción completada con éxito. Datos obtenidos: " + result);
-          })
-        } else{
+      } else {
+        if (result.length === 0) {
           console.log("No se encontró el usuario en la base de datos");
-          resolve({
-            message: "Usuario o contraseña incorrecta",
+          return resolve({
+            message: "Usuario no registrado.",
             icon: "error",
             timer: 2000,
             success: false,
             showCancelButton: false,
             confirmButton: "Ok"
           });
+        } else {
+          const checkEmailContra = 'SELECT id FROM usuarios WHERE correo_electronico = ? AND contrasenia = ?';
+
+          db.query(checkEmailContra, [correo_electronico, contrasenia], (err, result) => {
+            if (err) {
+              console.error("Error al consultar en la tabla usuarios: ", err);
+              return reject("Error al consultar en la tabla usuarios");
+            }
+            else {
+              if (result.length > 0) {
+                const usuario_id = result[0].id;
+
+                //REGISTRO DE ACCESO EN LA TABLA 'accesousuarios'
+                const acceso = { usuario_id };
+                const registrarAcceso = 'INSERT INTO accesousuarios SET ?';
+                db.query(registrarAcceso, acceso, (err, result) => {
+                  if (err) {
+                    console.error("Error al insertar en la tabla accesousuarios: ", err);
+                    return reject("Error al insertar en la tabla accesousuarios");
+                  }
+                  else {
+                    console.log("Transacción completada con éxito. ID insertado: " + result.insertId);
+                    resolve({
+                      title: "Bienvenido",
+                      message: "Acceso exitoso",
+                      icon: "success",
+                      timer: 2000,
+                      success: true,
+                      showCancelButton: false,
+                      confirmButton: "Ok"
+                    });
+                  }
+                  console.log("Transacción completada con éxito. Datos obtenidos: " + result);
+                })
+              } else{
+                console.log("No se encontró el usuario en la base de datos");
+                resolve({
+                  message: "Usuario o contraseña incorrecta",
+                  icon: "error",
+                  timer: 2000,
+                  success: false,
+                  showCancelButton: false,
+                  confirmButton: "Ok"
+                });
+              }
+            }
+            console.log("Transacción completada con éxito. Datos obtenidos: " + result);
+          });
         }
       }
-      console.log("Transacción completada con éxito. Datos obtenidos: " + result);
-    });
+    })
   });
 }
 

@@ -1,10 +1,10 @@
 const express = require('express');
-const getRegisterProveedor = require('../../controllers/registerProveedor')
+const getRegisterProveedor = require('../../controllers/Proveedores/registerProveedorController')
 
-const registerProveedorRoute = express();
+const postRegistrarProveedor = express();
 
-//USE THE QUERY registerProveedor.js
-registerProveedorRoute.post('/proveedores/registrarProveedor', async(req, res) => {
+//USE THE QUERY registerProveedorController.js
+postRegistrarProveedor.post('/proveedores/registrarProveedor', async(req, res) => {
   try {
     const proveedor = req.body;
     const result = await getRegisterProveedor(proveedor)
@@ -18,4 +18,4 @@ registerProveedorRoute.post('/proveedores/registrarProveedor', async(req, res) =
   }
 });
 
-module.exports = registerProveedorRoute;
+module.exports = postRegistrarProveedor;

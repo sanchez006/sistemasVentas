@@ -5,8 +5,16 @@ const cors = require('cors');
 const db = require('./src/config/dbConfig');
 const loginRoute = require('./src/routes/POST/loginRoute')
 const registerRoute = require('./src/routes/POST/registerRoute')
-const registerProductRoute = require('./src/routes/POST/registerProductRoute')
-const registerProveedorRoute = require('./src/routes/POST/registerProveedorRoute')
+const listarProductos = require('./src/routes/Productos/getListarProductos')
+const putProducto = require('./src/routes/Productos/putEditarProducto')
+const deleteEliminarProducto = require('./src/routes/Productos/deleteEliminarProducto')
+const postRegistrarProveedor = require('./src/routes/Proveedores/postRegistrarProveedor')
+const postRegistrarProducto = require('./src/routes/Productos/postRegistrarProducto')
+const getListarProveedores = require('./src/routes/Proveedores/getListarProveedores')
+const putProveedor = require('./src/routes/Proveedores/putEditarProveedor')
+const getListarClientes = require('./src/routes/Clientes/getListarClientes')
+const postRegistrarCliente = require('./src/routes/Clientes/postRegistrarCliente')
+const putCliente = require('./src/routes/Clientes/putEditarCliente')
 
 const app = express();
 const port = 3001;
@@ -29,11 +37,30 @@ db.connect((err) => {
 app.use(loginRoute);
 //USE THE QUERY register.js
 app.use(registerRoute);
-//USE THE QUERY registerProduct.js
-app.use(registerProductRoute);
-//USE THE QUERY registerProveedor.js
-app.use(registerProveedorRoute);
+//USE THE QUERY registerProductController.js
+app.use(postRegistrarProducto);
+//USE THE QUERY getListarProductos.js
+app.use(listarProductos);
+//USE THE QUERY editarProveedorController.js
+app.use(putProducto);
+//USE THE QUERY eliminarProductoController.js
+app.use(deleteEliminarProducto);
 
+
+//USE THE QUERY registerProveedorController.js
+app.use(postRegistrarProveedor);
+//USE THE QUERY getListarProveedores.js
+app.use(getListarProveedores);
+//USE THE QUERY putProveedor.js
+app.use(putProveedor);
+
+
+//USE THE QUERY getListarClientes.js
+app.use(getListarClientes);
+//USE THE QUERY postRegistrarCliente.js
+app.use(postRegistrarCliente);
+//USE THE QUERY putEditarCliente.js
+app.use(putCliente);
 
 app.listen(port, () => {
   console.log(`El servidor está corriendo en el puerto: ${port}`);

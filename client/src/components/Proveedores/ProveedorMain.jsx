@@ -10,6 +10,12 @@ import { useNavigate } from 'react-router-dom'
 export const ProveedorMain = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [refreshTable, setRefreshTable] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
+
+  const handleSearch = (value) => {
+    setSearchValue(value)
+  }
 
   const handleNewProveedor = () => {
     // Abre el modal al hacer clic en "Nuevo Producto"
@@ -20,6 +26,7 @@ export const ProveedorMain = () => {
   const handleCloseModal = () => {
     // Cierra el modal
     setIsModalOpen(false);
+    setRefreshTable(!refreshTable)
     navigate('/proveedores');
   };
 
@@ -41,12 +48,20 @@ export const ProveedorMain = () => {
       fullWidth: true
     },
     {
+      name: 'nit',
+      type: 'text',
+      placeholder: 'NIT',
+      label: 'NIT',
+      required: true,
+      fullWidth: false
+    },
+    {
       name: 'telefono',
       type: 'phone',
       placeholder: 'Telefono',
       label: 'No. Telefono',
       required: true,
-      fullWidth: true
+      fullWidth: false
     },
     {
       name: 'correoElectronico',
@@ -61,17 +76,18 @@ export const ProveedorMain = () => {
   return (
     <>
       <div className="relative p-5 overflow-x-auto shadow-md sm:rounded-lg">
-        <div className="flex flex-col sm:flex-row flex-wrap sm:space-x-4 items-center justify-between pb-4">
-          <div className="mb-4 sm:mb-0">
+        <div className="flex-col sm:flex-row flex-wrap sm:space-x-4 items-center justify-between pb-4">
+          {/*<div className="mb-4 sm:mb-0">*/}
             {/* FILTRO */}
-            <DropdownFilter/>
+          {/*<DropdownFilter/>*/}
             {/* FIN FILTRO */}
-          </div>
+          {/*</div>*/}
           <div className="flex gap-4">
             {/* BÚSQUEDA */}
             <SearchInput
               label="Buscar Proveedor"
               id="searchProveedor"
+              onSearch={handleSearch}
             />
             {/* FIN BÚSQUEDA */}
 
@@ -86,21 +102,25 @@ export const ProveedorMain = () => {
         </div>
         <div className="mb-4 sm:mb-0">
           {/* TABLA */}
-          <ProveedoresTable/>
+          <ProveedoresTable
+            key={refreshTable}
+            searchValue={searchValue}
+          />
           {/* FIN TABLA */}
         </div>
       </div>
 
       {/* MODAL */}
       <div className="justify-center items-center">
-      <Modal isOpen={isModalOpen}
-             onClose={handleCloseModal}
-             fields={fields}
-             endpoint="http://localhost:3001/proveedores/registrarProveedor"
-             labelBoton={"Agregar Proveedor"}
-             labelTitle={"Nuevo Proveedor"}
-             >
-      </Modal>
+        <Modal isOpen={isModalOpen}
+               onClose={handleCloseModal}
+               fields={fields}
+               endpoint="http://localhost:3001/proveedores/registrarProveedor"
+               labelBoton={"Agregar Proveedor"}
+               labelTitle={"Nuevo Proveedor"}
+               method="POST"
+               refreshTable={() => setRefreshTable(!refreshTable)}
+        />
       </div>
 
       {/* FIN MODAL */}

@@ -22,10 +22,8 @@ export const NavBar = () => {
               {/* <!-- SE UTILIZA EL COMPONENTE DEL BOTON SIDEBAR AL HACER CLICK --> */}
               <ButtonSidebar clickSidebar={toggleSidebar}/>
               {/* <!-- END BOTON SIDEBAR --> */}
-              <a href="https://flowbite.com" className="flex ms-2 md:me-24">
-                <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 me-3" alt="FlowBite Logo"/>
-                <span
-                  className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
+              <a href="/productos" className="flex ms-2 md:me-24">
+                <img src="https://mi-tiendita.com/wp-content/uploads/2019/09/Logo-Mi-Tiendita-Horizontal.png" className="h-8 me-3" alt="Logo"/>
               </a>
             </div>
             {/* <!-- VIEW MODE --> */}

@@ -1,5 +1,6 @@
+//registerRoute.js
 const express = require('express');
-const { getRegisterUser } = require('../../controllers/register')
+const getRegisterUser = require('../../controllers/register')
 
 const registerRoute = express();
 
@@ -19,3 +20,4 @@ registerRoute.post('/register', async(req, res) => {
 });
 
 module.exports = registerRoute;
+
