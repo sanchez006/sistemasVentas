@@ -1,3 +1,4 @@
+//UserLogin.jsx
 import '../App.css'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
@@ -55,8 +56,7 @@ export const UserLogin = () => {
                     className="mt-0 h-12 peer w-full pt-7 p-3 text-lg bg-gray-50 border border-gray-300 placeholder-transparent rounded-lg focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-700 dark:text-white dark:focus:ring-"
                     placeholder="Correo electrónico"
                     id="correo_electronico"
-                    name="correo_electronico"
-                    {...register('correo_electronico')}
+                    {...register('correo_electronico', { required: true })}
                   />
                   {errors.correo_electronico && <span className="text-red-500">Este campo es requerido</span>}
                   <LabelFloat text='Correo electrónico'/>
@@ -67,8 +67,7 @@ export const UserLogin = () => {
                     placeholder="contrasenia"
                     type="password"
                     id="contrasenia"
-                    name="contrasenia"
-                    {...register('contrasenia')}
+                    {...register('contrasenia', { required: true })}
                   />
                   {errors.contrasenia && <span className="text-red-500">Este campo es requerido</span>}
                   <LabelFloat text='Contraseña'/>

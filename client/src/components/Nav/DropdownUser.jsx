@@ -1,9 +1,9 @@
+//DropdownUser.jsx
 import { useState, useEffect, useRef } from 'react';
 
 export const DropdownUser = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const [userData, setUserData] = useState(null);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -21,6 +21,11 @@ export const DropdownUser = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  }
 
 
 
@@ -51,10 +56,10 @@ export const DropdownUser = () => {
           </div>
           <ul className="py-1">
             <li>
-              <a href="#"
-                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-              > Sign out
-              </a>
+              <button onClick = {handleLogout}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+              > Cerrar sesión
+              </button>
             </li>
           </ul>
         </div>

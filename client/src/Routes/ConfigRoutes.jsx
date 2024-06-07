@@ -5,6 +5,7 @@ import {RegisterUser} from "../pages/RegisterUser.jsx";
 import { Producto } from '../pages/Producto.jsx'
 import { Proveedores } from '../pages/Proveedores.jsx'
 import { Clientes } from '../pages/Clientes.jsx'
+import { Pedidos } from '../pages/Pedidos/Pedidos.jsx'
 
 export const ConfigRoutes = () => {
   return (
@@ -60,6 +61,15 @@ export const ConfigRoutes = () => {
         <Route
         path="/clientes/editarCliente/:id"
         element={<Clientes/>}
+      />
+
+      <Route
+        path="/pedidos"
+        element={<Pedidos/>}
+      />
+        <Route
+        path="/pedidos/registrarPedido"
+        element={<Pedidos/>}
       />
     </Routes>
   )
