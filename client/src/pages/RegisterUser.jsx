@@ -67,9 +67,8 @@ export const RegisterUser = () => {
           <ViewMode />
           <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <a href="" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-              <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+              <img className="w-40 h-15 mr-2" src="https://mi-tiendita.com/wp-content/uploads/2019/09/Logo-Mi-Tiendita-Horizontal.png"
                    alt="logo"/>
-              Flowbite
             </a>
             <div
                 className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-lg xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -163,16 +162,6 @@ export const RegisterUser = () => {
                         {...register('confirmar_contrasenia')}
                       />
                       <LabelFloat text={"Confirmar Contraseña"}/>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="flex items-center h-5">
-                      <input type="checkbox" id="miCheckbox"
-                             className="form-checkbox h-5 w-5 text-indigo-600 dark:bg-gray-800 dark:opacity-[0.3] dark:checked:bg-blue-900 dark:checked:opacity-1"/>
-                    </div>
-                    <div className="ml-3 text-sm">
-                      <label htmlFor="terms" className="font-light text-gray-500 dark:text-gray-300">Acepto los <a
-                        className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terminos y Condiciones.</a></label>
                     </div>
                   </div>
 
